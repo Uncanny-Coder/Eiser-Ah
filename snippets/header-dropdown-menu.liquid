@@ -1,103 +1,104 @@
-{% comment %}
-  Renders a standard dropdown style menu for the header.
-
-  Usage:
-  {% render 'header-dropdown-menu' %}
-{% endcomment %}
-
-<nav class="header__inline-menu">
+<nav class="header__inline-menu fs-3">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
-      <li>
+      <li class="nav-item dropdown">
         {%- if link.links != blank -%}
-          <header-menu>
-            <details id="Details-HeaderMenu-{{ forloop.index }}">
-              <summary
-                id="HeaderMenu-{{ link.handle }}"
-                class="header__menu-item list-menu__item link focus-inset"
-              >
-                <span
-                  {%- if link.child_active %}
-                    class="header__active-menu-item"
-                  {% endif %}
-                >
-                  {{- link.title | escape -}}
-                </span>
-                {{- 'icon-caret.svg' | inline_asset_content -}}
-              </summary>
-              <ul
-                id="HeaderMenu-MenuList-{{ forloop.index }}"
-                class="header__submenu list-menu list-menu--disclosure color-{{ section.settings.menu_color_scheme }} gradient caption-large motion-reduce global-settings-popup"
-                role="list"
-                tabindex="-1"
-              >
-                {%- for childlink in link.links -%}
-                  <li>
-                    {%- if childlink.links == blank -%}
+          <div class="dropdown">
+            <a
+              id="HeaderMenu-{{ link.handle }}"
+              class="nav-link dropdown-toggle"
+              href="#"
+              role="button">
+              {{ link.title | escape }}
+            </a>
+            <ul class="dropdown-menu">
+              {%- for childlink in link.links -%}
+                <li class="dropdown-submenu">
+                  {%- if childlink.links == blank -%}
+                    <a
+                      id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                      href="{{ childlink.url }}"
+                      class="dropdown-item fs-3 p-4">
+                      {{ childlink.title | escape }}
+                    </a>
+                  {%- else -%}
+                    <div class="dropdown fs-3">
                       <a
                         id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if childlink.current %} list-menu__item--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
+                        class="dropdown-item submenu-toggle"
+                        href="#">
                         {{ childlink.title | escape }}
                       </a>
-                    {%- else -%}
-                      <details id="Details-HeaderSubMenu-{{ link.handle }}-{{ childlink.handle }}">
-                        <summary
-                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                          class="header__menu-item link link--text list-menu__item focus-inset caption-large"
-                        >
-                          <span>{{ childlink.title | escape }}</span>
-                          {{- 'icon-caret.svg' | inline_asset_content -}}
-                        </summary>
-                        <ul
-                          id="HeaderMenu-SubMenuList-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                          class="header__submenu list-menu motion-reduce"
-                        >
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if grandchildlink.current %} list-menu__item--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      </details>
-                    {%- endif -%}
-                  </li>
-                {%- endfor -%}
-              </ul>
-            </details>
-          </header-menu>
+                      <ul class="dropdown-menu">
+                        {%- for grandchildlink in childlink.links -%}
+                          <li>
+                            <a
+                              id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                              href="{{ grandchildlink.url }}"
+                              class="dropdown-item">
+                              {{ grandchildlink.title | escape }}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
         {%- else -%}
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
-            class="header__menu-item list-menu__item link link--text focus-inset"
-            {% if link.current %}
-              aria-current="page"
-            {% endif %}
-          >
-            <span
-              {%- if link.current %}
-                class="header__active-menu-item"
-              {% endif %}
-            >
-              {{- link.title | escape -}}
-            </span>
+            class="nav-link">
+            {{ link.title | escape }}
           </a>
         {%- endif -%}
       </li>
     {%- endfor -%}
   </ul>
 </nav>
+
+<style>
+  .nav-link a {
+    font: 25px !important;
+  }
+  .nav-link,
+  .dropdown-item {
+    color: #2a2a2a;
+    text-decoration: none !important;
+  }
+
+  .nav-link:hover,
+  .dropdown-item:hover {
+    color: #71cd14 !important;
+    text-decoration: none !important;
+  }
+
+  /* Initially hide the dropdown */
+  .dropdown-menu {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease-in-out
+    , transform 0.3s ease-in-out;
+  }
+
+  .dropdown:hover > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-submenu:hover > .dropdown-menu {
+    display: block;
+    left: 100%;
+    top: 0;
+  }
+
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+</style>
