@@ -490,3 +490,33 @@
     color: currentColor;
   }
 }
+
+
+.banner__heading {
+  font-size: 52px !important;
+  font-weight: bold !important;
+  color: white !important;
+}
+
+.banner__heading span {
+  color: #71cd14 !important;
+}
+
+.banner__text {
+  font-size: 14px !important;
+  color: #ddd !important;
+}
+
+.banner__buttons .button {
+  background-color: #71cd14 !important;
+  color: white !important;
+  font-weight: bold !important;
+  padding: 12px 24px !important;
+  border-radius: 5px !important;
+  border: #71cd14 1px solid !important;
+}
+
+.banner__buttons .button:hover {
+  background-color: transparent !important;
+  color: #71cd14 !important;
+}

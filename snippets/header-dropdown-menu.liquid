@@ -8,7 +8,10 @@
               id="HeaderMenu-{{ link.handle }}"
               class="nav-link dropdown-toggle"
               href="#"
-              role="button">
+              role="button"
+              {% if link.title == 'Home' %}
+              style="color: #71CD14;"
+              {% endif %}>
               {{ link.title | escape }}
             </a>
             <ul class="dropdown-menu">
@@ -51,7 +54,10 @@
           <a
             id="HeaderMenu-{{ link.handle }}"
             href="{{ link.url }}"
-            class="nav-link">
+            class="nav-link"
+            {% if link.title == 'Home' %}
+            style="color: #71CD14;"
+            {% endif %}>
             {{ link.title | escape }}
           </a>
         {%- endif -%}
@@ -59,6 +65,7 @@
     {%- endfor -%}
   </ul>
 </nav>
+
 
 <style>
   .nav-link a {
@@ -69,6 +76,8 @@
     color: #2a2a2a;
     text-decoration: none !important;
     padding: 0 3rem;
+    font-size: 13px !important;
+    font-weight: 400 !important;
   }
 
   .nav-link:hover,
