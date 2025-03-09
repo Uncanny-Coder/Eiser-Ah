@@ -65,35 +65,45 @@
         "show_text_below": false
       }
     },
-    "rich_text": {
-      "type": "rich-text",
+    "logo_blocks_N3WiPE": {
+      "type": "logo-blocks",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "icon_block_ytyeRB": {
+          "type": "icon_block",
           "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
+            "title": "Money Back Guarantee",
+            "description": "Shall open divide a one"
           }
         },
-        "text": {
-          "type": "text",
+        "icon_block_dVGeCN": {
+          "type": "icon_block",
           "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+            "title": "Free Delivery",
+            "description": "Shall open divide a one"
+          }
+        },
+        "icon_block_hRfdFM": {
+          "type": "icon_block",
+          "settings": {
+            "title": "Always Support",
+            "description": "Shall open divide a one"
+          }
+        },
+        "icon_block_kq9zDy": {
+          "type": "icon_block",
+          "settings": {
+            "title": "Secure Payment",
+            "description": "Shall open divide a one"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text"
+        "icon_block_ytyeRB",
+        "icon_block_dVGeCN",
+        "icon_block_hRfdFM",
+        "icon_block_kq9zDy"
       ],
-      "settings": {
-        "desktop_content_position": "center",
-        "content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
-      }
+      "settings": {}
     },
     "featured_collection": {
       "type": "featured-collection",
@@ -232,7 +242,7 @@
   },
   "order": [
     "image_banner",
-    "rich_text",
+    "logo_blocks_N3WiPE",
     "featured_collection",
     "collage",
     "video",
