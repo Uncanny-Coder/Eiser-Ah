@@ -4,8 +4,8 @@
     "settings": [],
     "blocks": [
       {
-        "type": "icon",
-        "name": "Icon Block",
+        "type": "block",
+        "name": "Feature",
         "settings": [
           {
             "type": "text",
@@ -17,6 +17,10 @@
             "id": "description",
             "label": "Description",
             "default": "Shall open divide a one"
+          }, {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
           }
         ]
       }
@@ -24,18 +28,49 @@
     "presets": [
       {
         "name": "Logo Blocks",
+        "category": "Custom",
         "blocks": [
           {
-            "type": "icon"
+            "type": "block"
           }, {
-            "type": "icon"
+            "type": "block"
           }, {
-            "type": "icon"
+            "type": "block"
           }, {
-            "type": "icon"
+            "type": "block"
           }
         ]
       }
     ]
   }
 {% endschema %}
+
+<div class="container">
+  <div class="row">
+    {% for block in section.blocks %}
+      <div class="col-md-3 text-center">
+        <div class="card border-0 shadow-sm p-3">
+          {% if block.settings.icon %}
+            <img
+              src="{{ block.settings.icon | img_url: '100x100' }}"
+              alt="{{ block.settings.title }}"
+              class="mb-2">
+          {% endif %}
+          <h5 class="fw-bold">{{ block.settings.title }}</h5>
+          <p class="text-muted">{{ block.settings.description }}</p>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% stylesheet %}
+  <style > .card {
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out;
+  }
+  .card:hover {
+    transform: scale(1.05);
+  }
+  </style>
+{% endstylesheet %}
