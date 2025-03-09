@@ -71,6 +71,7 @@
         "icon_block_ytyeRB": {
           "type": "icon",
           "settings": {
+            "icon_class": "fa-solid fa-sack-dollar",
             "title": "Money Back Guarantee",
             "description": "Shall open divide a one"
           }
@@ -78,6 +79,7 @@
         "icon_block_dVGeCN": {
           "type": "icon",
           "settings": {
+            "icon_class": "fa-solid fa-truck",
             "title": "Free Delivery",
             "description": "Shall open divide a one"
           }
@@ -85,6 +87,7 @@
         "icon_block_hRfdFM": {
           "type": "icon",
           "settings": {
+            "icon_class": "fa-solid fa-headphones-simple",
             "title": "Always Support",
             "description": "Shall open divide a one"
           }
@@ -92,6 +95,7 @@
         "icon_block_kq9zDy": {
           "type": "icon",
           "settings": {
+            "icon_class": "fa-solid fa-shield",
             "title": "Secure Payment",
             "description": "Shall open divide a one"
           }
