@@ -1,8 +1,11 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flaticon@latest/css/flaticon.css">
+
+
 <div class="logo-blocks">
   {% for block in section.blocks %}
     <div class="logo-block">
-      {% if block.settings.icon != blank %}
-        <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="{{ block.settings.title }}">
+      {% if block.settings.icon_class != blank %}
+        <i class="{{ block.settings.icon_class }}"></i>
       {% endif %}
       <h3>{{ block.settings.title }}</h3>
       <p>{{ block.settings.description }}</p>
@@ -20,9 +23,10 @@
         "name": "Icon Block",
         "settings": [
           {
-            "type": "image_picker",
-            "id": "icon",
-            "label": "Icon"
+            "type": "text",
+            "id": "icon_class",
+            "label": "Icon Class",
+            "default": "flaticon-money"
           }, {
             "type": "text",
             "id": "title",
@@ -42,13 +46,25 @@
         "name": "Logo Blocks",
         "blocks": [
           {
-            "type": "icon"
+            "type": "icon",
+            "settings": {
+              "icon_class": "flaticon-money"
+            }
           }, {
-            "type": "icon"
+            "type": "icon",
+            "settings": {
+              "icon_class": "flaticon-truck"
+            }
           }, {
-            "type": "icon"
+            "type": "icon",
+            "settings": {
+              "icon_class": "flaticon-support"
+            }
           }, {
-            "type": "icon"
+            "type": "icon",
+            "settings": {
+              "icon_class": "flaticon-blockchain"
+            }
           }
         ]
       }
@@ -70,14 +86,16 @@
     width: 100%;
     max-width: 250px;
     background: #fff;
+    border: 1px solid #ddd;
     padding: 20px;
     border-radius: 5px;
   }
 
-  .logo-block img {
-    width: 50px;
-    height: 50px;
+  .logo-block i {
+    font-size: 40px;
+    color: #000;
     margin-bottom: 10px;
+    display: block;
   }
 
   .logo-block h3 {
