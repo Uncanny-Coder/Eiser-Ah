@@ -1,13 +1,29 @@
+<div class="logo-blocks">
+  {% for block in section.blocks %}
+    <div class="logo-block">
+      {% if block.settings.icon != blank %}
+        <img src="{{ block.settings.icon | img_url: '50x50' }}" alt="{{ block.settings.title }}">
+      {% endif %}
+      <h3>{{ block.settings.title }}</h3>
+      <p>{{ block.settings.description }}</p>
+    </div>
+  {% endfor %}
+</div>
+
 {% schema %}
   {
     "name": "Logo Blocks",
     "settings": [],
     "blocks": [
       {
-        "type": "block",
-        "name": "Feature",
+        "type": "icon",
+        "name": "Icon Block",
         "settings": [
           {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          }, {
             "type": "text",
             "id": "title",
             "label": "Title",
@@ -17,10 +33,6 @@
             "id": "description",
             "label": "Description",
             "default": "Shall open divide a one"
-          }, {
-            "type": "image_picker",
-            "id": "icon",
-            "label": "Icon"
           }
         ]
       }
@@ -28,16 +40,15 @@
     "presets": [
       {
         "name": "Logo Blocks",
-        "category": "Custom",
         "blocks": [
           {
-            "type": "block"
+            "type": "icon"
           }, {
-            "type": "block"
+            "type": "icon"
           }, {
-            "type": "block"
+            "type": "icon"
           }, {
-            "type": "block"
+            "type": "icon"
           }
         ]
       }
@@ -45,32 +56,40 @@
   }
 {% endschema %}
 
-<div class="container">
-  <div class="row">
-    {% for block in section.blocks %}
-      <div class="col-md-3 text-center">
-        <div class="card border-0 shadow-sm p-3">
-          {% if block.settings.icon %}
-            <img
-              src="{{ block.settings.icon | img_url: '100x100' }}"
-              alt="{{ block.settings.title }}"
-              class="mb-2">
-          {% endif %}
-          <h5 class="fw-bold">{{ block.settings.title }}</h5>
-          <p class="text-muted">{{ block.settings.description }}</p>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-</div>
 
 {% stylesheet %}
-  <style > .card {
-    border-radius: 10px;
-    transition: transform 0.3s ease-in-out;
+  .logo-blocks {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 30px 0;
   }
-  .card:hover {
-    transform: scale(1.05);
+
+  .logo-block {
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
   }
-  </style>
+
+  .logo-block img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .logo-block h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+
+  .logo-block p {
+    font-size: 14px;
+    color: #666;
+  }
+
 {% endstylesheet %}
