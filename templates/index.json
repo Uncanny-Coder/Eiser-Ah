@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "featured_products_RhJWVy": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Featured Products",
+        "subtitle": "Check out our best products",
+        "collection": ""
+      }
+    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -247,6 +255,7 @@
   "order": [
     "image_banner",
     "logo_blocks_N3WiPE",
+    "featured_products_RhJWVy",
     "featured_collection",
     "collage",
     "video",
