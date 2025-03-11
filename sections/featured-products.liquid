@@ -3,14 +3,16 @@
     <div class="row justify-content-center">
       <div class="col-lg-12">
         <div class="main_title">
-          <h2><span>Featured Product</span></h2>
-          <p>Bring called seed first of third give itself now ment</p>
+          <h2>
+            <span>{{ section.settings.title }}</span>
+          </h2>
+          <p>{{ section.settings.subtitle }}</p>
         </div>
       </div>
     </div>
 
     <div class="row">
-      {% for product in collections['featured-products'].products limit: 3 %}
+      {% for product in section.settings.collection.products limit: section.settings.product_limit %}
         <div class="col-lg-4 col-md-6">
           <div class="single-product">
             <div class="product-img">
@@ -73,24 +75,38 @@
       "type": "text",
       "id": "title",
       "label": "Section Title",
-      "default": "Featured Products"
+      "default": "Featured Product"
     },
     {
       "type": "text",
       "id": "subtitle",
-      "label": "Section Subtitle",
-      "default": "Check out our best products"
+      "label": "Subtitle",
+      "default": "Bring called seed first of third give itself now ment"
     },
     {
       "type": "collection",
       "id": "collection",
       "label": "Select Collection"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "Number of Products",
+      "min": 1,
+      "max": 12,
+      "default": 3
     }
   ],
   "presets": [
     {
       "name": "Featured Products",
-      "category": "Products"
+      "category": "Product Sections",
+      "settings": {
+        "title": "Featured Product",
+        "subtitle": "Bring called seed first of third give itself now ment",
+        "collection": "",
+        "product_limit": 3
+      }
     }
   ]
 }
