@@ -19,8 +19,7 @@
               <img
                 class="img-fluid w-100"
                 src="{{ product.featured_image | img_url: '500x' }}"
-                alt="{{ product.title }}"
-              >
+                alt="{{ product.title }}">
               <div class="p_icon">
                 <a href="{{ product.url }}">
                   <i class="ti-eye"></i>
@@ -68,46 +67,43 @@
 </script>
 
 {% schema %}
-{
-  "name": "Featured Products",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Section Title",
-      "default": "Featured Product"
-    },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": "Subtitle",
-      "default": "Bring called seed first of third give itself now ment"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Select Collection"
-    },
-    {
-      "type": "range",
-      "id": "product_limit",
-      "label": "Number of Products",
-      "min": 1,
-      "max": 12,
-      "default": 3
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured Products",
-      "category": "Product Sections",
-      "settings": {
-        "title": "Featured Product",
-        "subtitle": "Bring called seed first of third give itself now ment",
-        "collection": "",
-        "product_limit": 3
+  {
+    "name": "Featured Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title",
+        "default": "Featured Product"
+      }, {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subtitle",
+        "default": "Bring called seed first of third give itself now ment"
+      }, {
+        "type": "collection",
+        "id": "collection",
+        "label": "Select Collection"
+      }, {
+        "type": "range",
+        "id": "product_limit",
+        "label": "Number of Products",
+        "min": 1,
+        "max": 12,
+        "default": 3
       }
-    }
-  ]
-}
+    ],
+    "presets": [
+      {
+        "name": "Featured Products",
+        "category": "Product Sections",
+        "settings": {
+          "title": "Featured Product",
+          "subtitle": "Bring called seed first of third give itself now ment",
+          "collection": "",
+          "product_limit": 3
+        }
+      }
+    ]
+  }
 {% endschema %}
