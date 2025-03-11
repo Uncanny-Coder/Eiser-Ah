@@ -1,52 +1,134 @@
-<section class="feature_product_area section_gap_bottom_custom">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-12">
-        <div class="main_title">
-          <h2>
-            <span>{{ section.settings.title }}</span>
-          </h2>
-          <p>{{ section.settings.subtitle }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-      {% for product in collections[section.settings.collection].products limit: 3 %}
-        <div class="col-lg-4 col-md-6">
-          <div class="single-product">
-            <div class="product-img">
-              <img
-                class="img-fluid w-100"
-                src="{{ product.featured_image | img_url: 'medium' }}"
-                alt="{{ product.title }}"
-              >
-              <div class="p_icon">
-                <a href="{{ product.url }}">
-                  <i class="ti-eye"></i>
-                </a>
-                <a href="#">
-                  <i class="ti-heart"></i>
-                </a>
-                <a href="{{ product.url }}">
-                  <i class="ti-shopping-cart"></i>
-                </a>
-              </div>
-            </div>
-            <div class="product-btm">
-              <a href="{{ product.url }}" class="d-block">
-                <h4>{{ product.title }}</h4>
-              </a>
-              <div class="mt-3">
-                <span class="mr-4">{{ product.price | money }}</span>
-                {% if product.compare_at_price > product.price %}
-                  <del>{{ product.compare_at_price | money }}</del>
-                {% endif %}
-              </div>
+<section class="color-{{ section.settings.color_scheme }} {% if section.settings.secondary_background %}background-secondary{% else %}gradient{% endif %}">
+  <div class="page-width section-{{ section.id }}-padding{% if section.settings.secondary_background %} isolate{% endif %}">
+    <div class="featured-product product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 or section.settings.product == blank %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      <!-- Product Media -->
+      <div class="grid__item product__media-wrapper">
+        {% unless placeholder %}
+          {% render 'product-media-gallery', product: product, variant_images: variant_images, limit: 1 %}
+        {% else %}
+          <div class="product__media-item">
+            <div
+              class="product-media-container global-media-settings gradient{% if section.settings.constrain_to_viewport %} constrain-height{% endif %}"
+              style="--ratio: 1.0; --preview-ratio: 1.0;"
+            >
+              {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
             </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endunless %}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product__info-wrapper grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+        <section
+          id="ProductInfo-{{ section.id }}"
+          class="product__info-container"
+          data-section="{{ section.id }}"
+          data-url="{{ product.url }}"
+        >
+          {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when '@app' %}
+                {% render block %}
+              {% when 'text' %}
+                <p
+                  class="product__text inline-richtext{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.text }}
+                </p>
+              {% when 'title' %}
+                <h2 class="product__title {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  {% unless placeholder %}
+                    {{ product.title | escape }}
+                  {% else %}
+                    {{ 'onboarding.product_title' | t }}
+                  {% endunless %}
+                </h2>
+              {% when 'price' %}
+                <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                  {% render 'price',
+                    product: product,
+                    placeholder: placeholder,
+                    use_variant: true,
+                    show_badges: true,
+                    price_class: 'price--large'
+                  %}
+                </div>
+
+                <!-- Display additional tax/shipping info if available -->
+                {% if cart.taxes_included or cart.duties_included or shop.shipping_policy.body != blank %}
+                  <div class="product__tax caption rte">
+                    {% if cart.duties_included and cart.taxes_included %}
+                      {{ 'products.product.duties_and_taxes_included' | t }}
+                    {% elsif cart.taxes_included %}
+                      {{ 'products.product.taxes_included' | t }}
+                    {% elsif cart.duties_included %}
+                      {{ 'products.product.duties_included' | t }}
+                    {% endif %}
+                    {% if shop.shipping_policy.body != blank %}
+                      {{ 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                    {% endif %}
+                  </div>
+                {% endif %}
+
+                {% unless placeholder %}
+                  <div {{ block.shopify_attributes }}>
+                    {% form 'product', product %}
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                      {{ form | payment_terms }}
+                    {% endform %}
+                  </div>
+                {% endunless %}
+              {% when 'sku' %}
+                <p
+                  class="product__sku{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.sku.size == 0 %} visibility-hidden{% endif %}"
+                  id="Sku-{{ section.id }}"
+                  role="status"
+                  {{ block.shopify_attributes }}
+                >
+                  <span class="visually-hidden">{{ 'products.product.sku' | t }}:</span>
+                  {{ product.selected_or_first_available_variant.sku }}
+                </p>
+              {% when 'quantity_selector' %}
+                <div
+                  id="Quantity-Form-{{ section.id }}"
+                  class="product-form__input product-form__quantity"
+                  {{ block.shopify_attributes }}
+                >
+                  {% assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id %}
+                  <label class="quantity__label form__label" for="Quantity-{{ section.id }}">
+                    {{ 'products.product.quantity.label' | t }}
+                    <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}">
+                      <span>( {{ 'products.product.quantity.in_cart_html' | t: quantity: cart_qty }} )</span>
+                    </span>
+                  </label>
+                  <quantity-input class="quantity">
+                    <button class="quantity__button" name="minus" type="button">
+                      {{ 'icon-minus.svg' | inline_asset_content }}
+                    </button>
+                    <input
+                      class="quantity__input"
+                      type="number"
+                      name="quantity"
+                      id="Quantity-{{ section.id }}"
+                      data-cart-quantity="{{ cart_qty }}"
+                      data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                      value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                      form="{{ product_form_id }}"
+                    >
+                    <button class="quantity__button" name="plus" type="button">
+                      {{ 'icon-plus.svg' | inline_asset_content }}
+                    </button>
+                  </quantity-input>
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </section>
+      </div>
     </div>
   </div>
 </section>
