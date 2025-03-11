@@ -118,6 +118,62 @@
         "product_limit": 3
       }
     },
+    "image_banner_hMeLGK": {
+      "type": "image-banner",
+      "blocks": {
+        "text_eiriW7": {
+          "type": "text",
+          "settings": {
+            "text": "all men’s collection",
+            "text_style": "caption-with-letter-spacing"
+          }
+        },
+        "heading_ykKhmT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image",
+            "heading_size": "h1"
+          }
+        },
+        "text_jMGqnD": {
+          "type": "text",
+          "settings": {
+            "text": "Give customers details about the banner image(s) or content on the template.",
+            "text_style": "body"
+          }
+        },
+        "buttons_rxN8FB": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "text_eiriW7",
+        "heading_ykKhmT",
+        "text_jMGqnD",
+        "buttons_rxN8FB"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/offer-bg.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
+        "image_behavior": "none",
+        "desktop_content_position": "top-right",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
+        "mobile_content_alignment": "center",
+        "show_text_below": true
+      }
+    },
     "collage": {
       "type": "collage",
       "blocks": {
@@ -229,6 +285,7 @@
     "image_banner",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
+    "image_banner_hMeLGK",
     "collage",
     "video",
     "multicolumn"
