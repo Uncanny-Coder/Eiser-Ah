@@ -9,14 +9,6 @@
  */
 {
   "sections": {
-    "featured_products_RhJWVy": {
-      "type": "featured-products",
-      "settings": {
-        "title": "Featured Products",
-        "subtitle": "Check out our best products",
-        "collection": ""
-      }
-    },
     "image_banner": {
       "type": "image-banner",
       "blocks": {
@@ -117,32 +109,13 @@
       ],
       "settings": {}
     },
-    "featured_collection": {
-      "type": "featured-collection",
+    "featured_products_RhJWVy": {
+      "type": "featured-products",
       "settings": {
+        "title": "Featured Products",
+        "subtitle": "Check out our best products",
         "collection": "all",
-        "products_to_show": 8,
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "columns_desktop": 4,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": false,
-        "view_all_style": "solid",
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 28,
-        "padding_bottom": 36
+        "product_limit": 3
       }
     },
     "collage": {
@@ -256,7 +229,6 @@
     "image_banner",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
-    "featured_collection",
     "collage",
     "video",
     "multicolumn"
