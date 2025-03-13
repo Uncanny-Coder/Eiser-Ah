@@ -22,13 +22,13 @@
                 alt="{{ product.title }}">
               <div class="p_icon">
                 <a href="{{ product.url }}">
-                  <i class="ti-eye"></i>
+                  <i class="fa-solid fa-eye"></i>
                 </a>
                 <a href="#" onclick="addToWishlist('{{ product.id }}')">
-                  <i class="ti-heart"></i>
+                  <i class="fa-regular fa-heart"></i>
                 </a>
                 <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
-                  <i class="ti-shopping-cart"></i>
+                  <i class="fa-solid fa-cart-shopping"></i>
                 </a>
               </div>
             </div>
@@ -62,7 +62,7 @@
   }
 
   function addToWishlist(productId) {
-    alert('Added to wishlist!'); // Implement actual wishlist logic if needed.
+    alert('Added to wishlist!');
   }
 </script>
 
