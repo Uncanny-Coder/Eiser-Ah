@@ -17,9 +17,10 @@
           <div class="single-product">
             <div class="product-img">
               <img
-                class="img-fluid w-100"
+                class="img-fluid"
                 src="{{ product.featured_image | img_url: '500x' }}"
-                alt="{{ product.title }}">
+                alt="{{ product.title }}"
+                style="width: 90%;">
               <div class="p_icon">
                 <a href="{{ product.url }}">
                   <i class="fa-solid fa-eye"></i>
