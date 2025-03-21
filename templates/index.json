@@ -138,10 +138,10 @@
         "buttons_yEfNAR": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Button label",
+            "button_label_1": "Discover Now",
             "button_link_1": "",
             "button_style_secondary_1": false,
-            "button_label_2": "Button label",
+            "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
           }
@@ -166,7 +166,7 @@
         "image_height": "medium",
         "image_behavior": "none",
         "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "right",
+        "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "",
         "stack_images_on_mobile": true,
