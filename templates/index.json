@@ -9,24 +9,31 @@
  */
 {
   "sections": {
-    "img_banner_2_axBTEJ": {
-      "type": "img-banner-2",
+    "image_banner_4HdQAy": {
+      "type": "image-banner",
       "blocks": {
-        "heading_QHVF6k": {
+        "text_dPEj9H": {
+          "type": "text",
+          "settings": {
+            "text": "Men Collections",
+            "text_style": "body"
+          }
+        },
+        "heading_KKDCRF": {
           "type": "heading",
           "settings": {
             "heading": "Image banner",
             "heading_size": "h1"
           }
         },
-        "text_KhJfc9": {
+        "text_p3TCHM": {
           "type": "text",
           "settings": {
             "text": "Give customers details about the banner image(s) or content on the template.",
             "text_style": "body"
           }
         },
-        "buttons_3hYJ6c": {
+        "buttons_j8TCRb": {
           "type": "buttons",
           "settings": {
             "button_label_1": "Button label",
@@ -39,20 +46,22 @@
         }
       },
       "block_order": [
-        "heading_QHVF6k",
-        "text_KhJfc9",
-        "buttons_3hYJ6c"
+        "text_dPEj9H",
+        "heading_KKDCRF",
+        "text_p3TCHM",
+        "buttons_j8TCRb"
       ],
       "settings": {
+        "image": "shopify://shop_images/banner-bg.jpg",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "middle-center",
-        "desktop_content_alignment": "center",
-        "show_text_box": true,
+        "desktop_content_position": "middle-left",
+        "desktop_content_alignment": "left",
+        "show_text_box": false,
         "color_scheme": "",
         "stack_images_on_mobile": true,
-        "mobile_content_alignment": "center",
+        "mobile_content_alignment": "right",
         "show_text_below": true
       }
     },
@@ -265,7 +274,7 @@
     }
   },
   "order": [
-    "img_banner_2_axBTEJ",
+    "image_banner_4HdQAy",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
     "img_banner_2_DdKh9q",
