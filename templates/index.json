@@ -118,47 +118,47 @@
         "product_limit": 3
       }
     },
-    "img_banner_2_DdKh9q": {
+    "img_banner_2_cPME98": {
       "type": "img-banner-2",
       "blocks": {
-        "heading_nP37LE": {
+        "text_ERBB8X": {
+          "type": "text",
+          "settings": {
+            "text": "all men’s collection",
+            "text_style": "body"
+          }
+        },
+        "heading_bKfqFa": {
           "type": "heading",
           "settings": {
             "heading": "Image banner",
             "heading_size": "h1"
           }
         },
-        "buttons_Mewttr": {
+        "buttons_yEfNAR": {
           "type": "buttons",
           "settings": {
             "button_label_1": "Button label",
             "button_link_1": "",
             "button_style_secondary_1": false,
-            "button_label_2": "",
+            "button_label_2": "Button label",
             "button_link_2": "",
-            "button_style_secondary_2": true
-          }
-        },
-        "text_6pLxK4": {
-          "type": "text",
-          "settings": {
-            "text": "Limited Time offer",
-            "text_style": "body"
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "heading_nP37LE",
-        "buttons_Mewttr",
-        "text_6pLxK4"
+        "text_ERBB8X",
+        "heading_bKfqFa",
+        "buttons_yEfNAR"
       ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "middle-right",
-        "desktop_content_alignment": "center",
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "right",
         "show_text_box": false,
         "color_scheme": "",
         "stack_images_on_mobile": true,
@@ -277,7 +277,7 @@
     "image_banner_4HdQAy",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
-    "img_banner_2_DdKh9q",
+    "img_banner_2_cPME98",
     "collage",
     "video",
     "multicolumn"
