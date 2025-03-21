@@ -9,60 +9,51 @@
  */
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "img_banner_2_axBTEJ": {
+      "type": "img-banner-2",
       "blocks": {
-        "text_3XdmFG": {
-          "type": "text",
-          "settings": {
-            "text": "MENS COLLECTION",
-            "text_style": "body"
-          }
-        },
-        "heading": {
+        "heading_QHVF6k": {
           "type": "heading",
           "settings": {
-            "heading": "Show Your Personal Style",
-            "heading_size": "h0"
+            "heading": "Image banner",
+            "heading_size": "h1"
           }
         },
-        "text": {
+        "text_KhJfc9": {
           "type": "text",
           "settings": {
-            "text": "Fowl saw dry which a above together place.",
+            "text": "Give customers details about the banner image(s) or content on the template.",
             "text_style": "body"
           }
         },
-        "button": {
+        "buttons_3hYJ6c": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "View Collection",
-            "button_link_1": "shopify://collections",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
+            "button_label_1": "Button label",
+            "button_link_1": "",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
             "button_link_2": "",
             "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "text_3XdmFG",
-        "heading",
-        "text",
-        "button"
+        "heading_QHVF6k",
+        "text_KhJfc9",
+        "buttons_3hYJ6c"
       ],
       "settings": {
-        "image": "shopify://shop_images/banner-bg.jpg",
         "image_overlay_opacity": 0,
-        "image_height": "large",
+        "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "middle-left",
-        "desktop_content_alignment": "left",
-        "show_text_box": false,
-        "color_scheme": "scheme-3",
-        "stack_images_on_mobile": false,
+        "desktop_content_position": "middle-center",
+        "desktop_content_alignment": "center",
+        "show_text_box": true,
+        "color_scheme": "",
+        "stack_images_on_mobile": true,
         "mobile_content_alignment": "center",
-        "show_text_below": false
+        "show_text_below": true
       }
     },
     "logo_blocks_N3WiPE": {
@@ -118,55 +109,47 @@
         "product_limit": 3
       }
     },
-    "image_banner_hMeLGK": {
-      "type": "image-banner",
+    "img_banner_2_DdKh9q": {
+      "type": "img-banner-2",
       "blocks": {
-        "text_eiriW7": {
-          "type": "text",
-          "settings": {
-            "text": "all men’s collection",
-            "text_style": "caption-with-letter-spacing"
-          }
-        },
-        "heading_ykKhmT": {
+        "heading_nP37LE": {
           "type": "heading",
           "settings": {
-            "heading": "Image",
+            "heading": "Image banner",
             "heading_size": "h1"
           }
         },
-        "text_jMGqnD": {
-          "type": "text",
-          "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
-          }
-        },
-        "buttons_DNmpVN": {
+        "buttons_Mewttr": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Discover Now",
+            "button_label_1": "Button label",
             "button_link_1": "",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
-            "button_style_secondary_2": false
+            "button_style_secondary_2": true
+          }
+        },
+        "text_6pLxK4": {
+          "type": "text",
+          "settings": {
+            "text": "Limited Time offer",
+            "text_style": "body"
           }
         }
       },
       "block_order": [
-        "text_eiriW7",
-        "heading_ykKhmT",
-        "text_jMGqnD",
-        "buttons_DNmpVN"
+        "heading_nP37LE",
+        "buttons_Mewttr",
+        "text_6pLxK4"
       ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "top-right",
-        "desktop_content_alignment": "left",
+        "desktop_content_position": "middle-right",
+        "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "",
         "stack_images_on_mobile": true,
@@ -282,10 +265,10 @@
     }
   },
   "order": [
-    "image_banner",
+    "img_banner_2_axBTEJ",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
-    "image_banner_hMeLGK",
+    "img_banner_2_DdKh9q",
     "collage",
     "video",
     "multicolumn"
