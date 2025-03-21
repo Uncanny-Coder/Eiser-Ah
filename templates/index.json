@@ -145,12 +145,20 @@
             "button_link_2": "",
             "button_style_secondary_2": false
           }
+        },
+        "text_cNpUGY": {
+          "type": "text",
+          "settings": {
+            "text": "Limited Time offer",
+            "text_style": "body"
+          }
         }
       },
       "block_order": [
         "text_ERBB8X",
         "heading_bKfqFa",
-        "buttons_yEfNAR"
+        "buttons_yEfNAR",
+        "text_cNpUGY"
       ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
