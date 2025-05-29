@@ -9,6 +9,16 @@
  */
 {
   "sections": {
+    "custom_liquid_TGyajf": {
+      "type": "custom-liquid",
+      "name": "New Products",
+      "settings": {
+        "custom_liquid": "",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "image_banner_4HdQAy": {
       "type": "image-banner",
       "blocks": {
@@ -163,7 +173,7 @@
       "custom_css": [
         "p {font-size: 24px; font-weight: 300; color: #4a4a4a;}",
         "h2 {font-size: 100px !important; line-height: 80px !important; color: #2a2a2a !important; margin-bottom: 0px !important; font-weight: 700 !important;}",
-        "a{}"
+        "a {}"
       ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
@@ -287,6 +297,7 @@
     }
   },
   "order": [
+    "custom_liquid_TGyajf",
     "image_banner_4HdQAy",
     "logo_blocks_N3WiPE",
     "featured_products_RhJWVy",
