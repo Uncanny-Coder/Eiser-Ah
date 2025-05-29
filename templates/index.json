@@ -162,7 +162,8 @@
       ],
       "custom_css": [
         "p {font-size: 24px; font-weight: 300; color: #4a4a4a;}",
-        "h2{font-size: 100px !important; line-height: 80px !important; color: #2a2a2a !important; margin-bottom: 0px !important; font-weight: 700 !important;}"
+        "h2 {font-size: 100px !important; line-height: 80px !important; color: #2a2a2a !important; margin-bottom: 0px !important; font-weight: 700 !important;}",
+        "a{}"
       ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
