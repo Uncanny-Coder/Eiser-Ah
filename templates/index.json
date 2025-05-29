@@ -125,7 +125,7 @@
           "type": "text",
           "settings": {
             "text": "all men’s collection",
-            "text_style": "body"
+            "text_style": "caption-with-letter-spacing"
           }
         },
         "heading_bKfqFa": {
@@ -160,12 +160,15 @@
         "buttons_yEfNAR",
         "text_cNpUGY"
       ],
+      "custom_css": [
+        "p {color: black;}"
+      ],
       "settings": {
         "image": "shopify://shop_images/offer-bg.png",
         "image_overlay_opacity": 0,
         "image_height": "medium",
         "image_behavior": "none",
-        "desktop_content_position": "middle-center",
+        "desktop_content_position": "middle-right",
         "desktop_content_alignment": "center",
         "show_text_box": false,
         "color_scheme": "",
