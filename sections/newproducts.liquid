@@ -39,13 +39,13 @@
                   alt="{{ product.title }}" />
                 <div class="p_icon">
                   <a href="{{ product.url }}">
-                    <i class="ti-eye"></i>
+                    <i class="fa-solid fa-eye"></i>
                   </a>
-                  <a href="#">
-                    <i class="ti-heart"></i>
+                  <a href="#" onclick="addToWishlist('{{ product.id }}')">
+                    <i class="fa-regular fa-heart"></i>
                   </a>
-                  <a href="{{ product.url }}">
-                    <i class="ti-shopping-cart"></i>
+                  <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
+                    <i class="fa-solid fa-cart-shopping"></i>
                   </a>
                 </div>
               </div>

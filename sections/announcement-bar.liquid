@@ -2,8 +2,24 @@
   a {
     text-decoration: none !important;
   }
-</style>
 
+  @media (max-width: 998px) {
+    .top_menu .float-right {
+      display: none;
+    }
+
+    .top_menu .float-left {
+      float: none !important;
+      text-align: center;
+    }
+
+    .top_menu .col-lg-7,
+    .top_menu .col-lg-5 {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
 
 <div class="top_menu">
   <div class="container">
@@ -11,26 +27,20 @@
       <div class="col-lg-7">
         <div class="float-left">
           <p>Phone: +01 256 25 235</p>
-          <p>email: info@eiser.com</p>
+          <p>Email: info@eiser.com</p>
         </div>
       </div>
       <div class="col-lg-5">
         <div class="float-right">
           <ul class="right_side">
             <li>
-              <a href="cart.html">
-                gift card
-              </a>
+              <a href="cart.html">Gift Card</a>
             </li>
             <li>
-              <a href="tracking.html">
-                track order
-              </a>
+              <a href="tracking.html">Track Order</a>
             </li>
             <li>
-              <a href="contact.html">
-                Contact Us
-              </a>
+              <a href="contact.html">Contact Us</a>
             </li>
           </ul>
         </div>
@@ -38,97 +48,3 @@
     </div>
   </div>
 </div>
-
-
-{% schema %}
-  {
-    "name": "t:sections.announcement-bar.name",
-    "max_blocks": 12,
-    "class": "announcement-bar-section",
-    "enabled_on": {
-      "groups": ["header"]
-    },
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "auto_rotate",
-        "label": "t:sections.announcement-bar.settings.auto_rotate.label",
-        "default": false
-      },
-      {
-        "type": "range",
-        "id": "change_slides_speed",
-        "min": 3,
-        "max": 10,
-        "step": 1,
-        "unit": "s",
-        "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
-        "default": 5
-      },
-      {
-        "type": "color_scheme",
-        "id": "color_scheme",
-        "label": "t:sections.all.colors.label",
-        "default": "scheme-4"
-      },
-      {
-        "type": "checkbox",
-        "id": "show_line_separator",
-        "default": true,
-        "label": "t:sections.header.settings.show_line_separator.label"
-      }, {
-        "type": "header",
-        "content": "t:sections.announcement-bar.settings.heading_utilities.content"
-      }, {
-        "type": "paragraph",
-        "content": "t:sections.announcement-bar.settings.paragraph.content"
-      }, {
-        "type": "checkbox",
-        "id": "show_social",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.show_social.label",
-        "info": "t:sections.announcement-bar.settings.show_social.info"
-      }, {
-        "type": "checkbox",
-        "id": "enable_country_selector",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.enable_country_selector.label",
-        "info": "t:sections.announcement-bar.settings.enable_country_selector.info"
-      }, {
-        "type": "checkbox",
-        "id": "enable_language_selector",
-        "default": false,
-        "label": "t:sections.announcement-bar.settings.enable_language_selector.label",
-        "info": "t:sections.announcement-bar.settings.enable_language_selector.info"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "announcement",
-        "name": "t:sections.announcement-bar.blocks.announcement.name",
-        "settings": [
-          {
-            "type": "text",
-            "id": "text",
-            "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
-            "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
-          }, {
-            "type": "url",
-            "id": "link",
-            "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
-          }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "t:sections.announcement-bar.presets.name",
-        "blocks": [
-          {
-            "type": "announcement"
-          }
-        ]
-      }
-    ]
-  }
-{% endschema %}
