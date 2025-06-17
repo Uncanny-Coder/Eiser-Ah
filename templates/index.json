@@ -184,6 +184,16 @@
       "name": "New Products",
       "settings": {}
     },
+    "inspires_products_AV3xUY": {
+      "type": "inspires-products",
+      "name": "Inspired Products",
+      "settings": {
+        "section_heading": "Inspired products",
+        "section_subheading": "Bring called seed first of third give itself now ment",
+        "product_collection": "all",
+        "product_limit": 7
+      }
+    },
     "video": {
       "type": "video",
       "settings": {
@@ -249,16 +259,6 @@
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "inspires_products_AV3xUY": {
-      "type": "inspires-products",
-      "name": "Inspired Products",
-      "settings": {
-        "section_heading": "Inspired products",
-        "section_subheading": "Bring called seed first of third give itself now ment",
-        "product_collection": "",
-        "product_limit": 8
       }
     }
   },
