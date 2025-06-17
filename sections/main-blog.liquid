@@ -1,80 +1,141 @@
+{% style %}
+  .blog-area {
+    padding: 80px 0;
+  }
+
+  .main_title h2 {
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .main_title p {
+    text-align: center;
+    color: #7a7a7a;
+    margin-bottom: 40px;
+  }
+
+  .single-blog {
+    margin-bottom: 30px;
+    background: #fff;
+  }
+
+  .single-blog .thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .short_details {
+    padding: 20px 0;
+  }
+
+  .meta-top {
+    font-size: 14px;
+    color: #7a7a7a;
+    margin-bottom: 10px;
+  }
+
+  .meta-top a {
+    margin-right: 15px;
+    color: #7a7a7a;
+    text-decoration: none;
+  }
+
+  .single-blog h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+
+  .single-blog h4:hover {
+    color: #4CAF50;
+    /* Green hover */
+  }
+
+  .text-wrap p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+
+  .blog_btn {
+    font-weight: 600;
+    font-size: 14px;
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .blog_btn:hover {
+    color: #4CAF50;
+  }
+
+{% endstyle %}
+
 {%- paginate blog.articles by 6 -%}
   <section class="blog-area section-gap">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-12">
-          <div class="main_title">
-            <h2>
-              <span>{{ blog.title }}</span>
-            </h2>
+          <div class="main_title text-center">
+            <h2>LATEST BLOG</h2>
             <p>Bring called seed first of third give itself now ment</p>
           </div>
         </div>
       </div>
 
       <div class="row">
-        {% for article in blog.articles %}
-          <div class="col-lg-4 col-md-6">
-            <div class="single-blog">
-              {% if article.image %}
-                <div class="thumb">
-                  <img
-                    class="img-fluid"
-                    src="{{ article.image | img_url: '500x' }}"
-                    alt="{{ article.title | escape }}">
-                </div>
-              {% endif %}
-
-              <div class="short_details">
-                <div class="meta-top d-flex">
-                  {% if section.settings.show_author %}
-                    <a href="#">By {{ article.author }}</a>
-                  {% endif %}
-                  <a href="{{ article.url }}">
-                    <i class="ti-comments-smiley"></i>
-                    {{ article.comments_count | default: 0 }} Comments
-                  </a>
-                </div>
-
-                <a class="d-block" href="{{ article.url }}">
-                  <h4>{{ article.title }}</h4>
-                </a>
-
-                <div class="text-wrap">
-                  <p>
-                    {{ article.excerpt | strip_html | truncate: 100 }}
-                  </p>
-                </div>
-
-                <a href="{{ article.url }}" class="blog_btn">
-                  Learn More
-                  <span class="ml-2 ti-arrow-right"></span>
-                </a>
+        <!-- Blog card start -->
+        <div class="col-lg-4 col-md-6">
+          <div class="single-blog">
+            <div class="thumb">
+              <img
+                class="img-fluid"
+                src="img/b1.jpg"
+                alt="Blog Image">
+            </div>
+            <div class="short_details">
+              <div class="meta-top d-flex">
+                <a href="#">By Admin</a>
+                <a href="#">
+                  <i class="ti-comments-smiley"></i>
+                  2 Comments</a>
               </div>
+              <a class="d-block" href="#">
+                <h4 class="blog-title">Ford clever bed stops your sleeping partner hogging the whole</h4>
+              </a>
+              <div class="text-wrap">
+                <p>
+                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light Forth.
+                </p>
+              </div>
+              <a href="#" class="blog_btn">LEARN MORE
+                <span class="ml-2 ti-arrow-right"></span>
+              </a>
             </div>
           </div>
-        {% endfor %}
-      </div>
-
-      {% if paginate.pages > 1 %}
-        <div class="pagination-container">
-          {% render 'pagination'
-            , paginate: paginate %}
         </div>
-      {% endif %}
+      <!-- Repeat for more blog cards -->
+      </div>
     </div>
   </section>
+
 {%- endpaginate -%}
 
 {% schema %}
   {
-    "name": "Blog Area",
+    "name": "Custom Blog Area",
     "tag": "section",
+    "class": "section",
     "settings": [
       {
         "type": "checkbox",
         "id": "show_author",
-        "label": "Show Author",
+        "label": "Show author name",
         "default": true
       }
     ],
