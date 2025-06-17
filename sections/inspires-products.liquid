@@ -4,61 +4,52 @@
       <div class="col-lg-12">
         <div class="main_title">
           <h2>
-            <span>{{ section.settings.section_heading }}</span>
+            <span>{{ section.settings.title }}</span>
           </h2>
-          <p>{{ section.settings.section_subheading }}</p>
+          <p>{{ section.settings.subtitle }}</p>
         </div>
       </div>
     </div>
 
     <div class="row">
-      {% assign collection_products = collections['all'].products | slice: 0, section.settings.product_limit %}
-
-      {% for product in collection_products %}
-        <div class="col-lg-3 col-md-6">
-          <div class="single-product">
-            <div class="product-img">
-              <a href="{{ product.url }}">
+      {% if section.settings.collection != blank %}
+        {% for product in section.settings.collection.products limit: section.settings.product_limit %}
+          <div class="col-lg-3 col-md-6">
+            <div class="single-product">
+              <div class="product-img">
                 <img
                   class="img-fluid w-100"
-                  src="{{ product.featured_image | image_url: width: 400 }}"
+                  src="{{ product.featured_image | img_url: '500x' }}"
                   alt="{{ product.title }}">
-              </a>
-              <div class="p_icon">
-                <a href="{{ product.url }}">
-                  <i class="ti-eye"></i>
-                </a>
-                <a
-                  href="#"
-                  class="add-to-wishlist"
-                  data-product-id="{{ product.id }}">
-                  <i class="ti-heart"></i>
-                </a>
-                <form method="post" action="/cart/add">
-                  <input
-                    type="hidden"
-                    name="id"
-                    value="{{ product.variants.first.id }}">
-                  <button type="submit" class="border-0 bg-transparent p-0">
+                <div class="p_icon">
+                  <a href="{{ product.url }}">
+                    <i class="ti-eye"></i>
+                  </a>
+                  <a href="#" onclick="addToWishlist('{{ product.id }}')">
+                    <i class="ti-heart"></i>
+                  </a>
+                  <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
                     <i class="ti-shopping-cart"></i>
-                  </button>
-                </form>
+                  </a>
+                </div>
               </div>
-            </div>
-            <div class="product-btm">
-              <a href="{{ product.url }}" class="d-block">
-                <h4>{{ product.title }}</h4>
-              </a>
-              <div class="mt-3">
-                <span class="mr-4">{{ product.price | money }}</span>
-                {% if product.compare_at_price > product.price %}
-                  <del>{{ product.compare_at_price | money }}</del>
-                {% endif %}
+              <div class="product-btm">
+                <a href="{{ product.url }}" class="d-block">
+                  <h4>{{ product.title }}</h4>
+                </a>
+                <div class="mt-3">
+                  <span class="mr-4">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <del>{{ product.compare_at_price | money }}</del>
+                  {% endif %}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      {% else %}
+        <p class="text-center">No collection selected or products unavailable.</p>
+      {% endif %}
     </div>
   </div>
 </section>
@@ -71,18 +62,18 @@
     "settings": [
       {
         "type": "text",
-        "id": "section_heading",
+        "id": "title",
         "label": "Section Heading",
-        "default": "Inspired products"
+        "default": "Inspired Products"
       }, {
         "type": "text",
-        "id": "section_subheading",
+        "id": "subtitle",
         "label": "Section Subheading",
         "default": "Bring called seed first of third give itself now ment"
       }, {
         "type": "collection",
-        "id": "product_collection",
-        "label": "Product Collection"
+        "id": "collection",
+        "label": "Select Collection"
       }, {
         "type": "range",
         "id": "product_limit",
