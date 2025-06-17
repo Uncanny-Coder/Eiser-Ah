@@ -1,34 +1,42 @@
 {% comment %}theme-check-disable UndefinedObject{% endcomment %}
 {{ 'section-footer.css' | asset_url | stylesheet_tag }}
 {{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .footer {
     margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
     background-color: #222;
     color: #fff;
-    padding: 80px 0 20px;
+    padding: 60px 0 20px;
+    font-family: Arial, sans-serif;
   }
 
-  .footer a {
-    color: #fff;
-    opacity: 0.7;
-    transition: all 0.3s ease;
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
   }
 
-  .footer a:hover {
-    opacity: 1;
-    text-decoration: none;
+  .footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 30px;
+    padding: 0 15px;
+  }
+
+  .footer-column.newsletter {
+    flex: 1.5;
   }
 
   .footer h4 {
     color: #fff;
-    margin-bottom: 25px;
-    font-weight: 600;
+    margin-bottom: 20px;
     font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   .footer ul {
@@ -38,163 +46,136 @@
   }
 
   .footer ul li {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .footer a {
+    color: #fff;
+    opacity: 0.8;
+    text-decoration: none;
+    transition: opacity 0.3s;
+  }
+
+  .footer a:hover {
+    opacity: 1;
+  }
+
+  .newsletter-content {
+    margin-bottom: 15px;
+    opacity: 0.8;
+    line-height: 1.5;
   }
 
   .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding-top: 20px;
     margin-top: 40px;
-  }
-
-  .footer-social a {
-    display: inline-block;
-    margin-right: 15px;
-    font-size: 16px;
-  }
-
-  .footer-text {
+    text-align: center;
+    font-size: 14px;
     opacity: 0.7;
   }
 
-  .form-inline {
+  .footer-form {
     display: flex;
+    margin-top: 20px;
   }
 
-  .form-control {
-    height: 45px;
-    border-radius: 0;
+  .footer-input {
+    flex: 1;
+    padding: 10px 15px;
     border: none;
-    width: 100%;
-    padding: 0 20px;
+    font-size: 14px;
   }
 
-  .click-btn {
-    height: 45px;
-    border-radius: 0;
-    border: none;
+  .footer-button {
     background: #f42f2c;
-    color: #fff;
+    color: white;
+    border: none;
     padding: 0 20px;
     cursor: pointer;
-    white-space: nowrap;
+    font-size: 14px;
   }
 
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
-
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+  @media (max-width: 768px) {
+    .footer-column {
+      flex: 100%;
     }
   }
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div class="page-width">
-    <div class="row" style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;">
-      {%- for block in section.blocks -%}
-        <div
-          class="single-footer-widget"
-          style="flex: 0 0 25%; max-width: 25%; padding-right: 15px; padding-left: 15px;"
-        >
-          {%- if block.settings.heading != blank -%}
-            <h4>{{ block.settings.heading }}</h4>
-          {%- endif -%}
-
-          {%- case block.type -%}
-            {%- when 'link_list' -%}
-              {%- if block.settings.menu != blank -%}
-                <ul>
-                  {%- for link in block.settings.menu.links -%}
-                    <li>
-                      <a href="{{ link.url }}">
-                        {{ link.title | escape }}
-                      </a>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              {%- endif -%}
-          {%- endcase -%}
-        </div>
-      {%- endfor -%}
-
-      <div class="single-footer-widget" style="flex: 0 0 25%; max-width: 25%; padding-right: 15px; padding-left: 15px;">
-        {%- if section.settings.newsletter_enable -%}
-          <h4>{{ section.settings.newsletter_heading }}</h4>
-          <p>{{ section.settings.newsletter_description }}</p>
-          {%- form 'customer', id: 'ContactFooter', class: 'form-inline' -%}
-            <input type="hidden" name="contact[tags]" value="newsletter">
-            <input
-              class="form-control"
-              name="contact[email]"
-              placeholder="{{ 'newsletter.label' | t }}"
-              required=""
-              type="email"
-            >
-            <button class="click-btn btn btn-default" type="submit">{{ 'newsletter.button_label' | t }}</button>
-          {%- endform -%}
+  <div class="footer-container">
+    {%- for block in section.blocks -%}
+      <div class="footer-column">
+        {%- if block.settings.heading != blank -%}
+          <h4>{{ block.settings.heading }}</h4>
         {%- endif -%}
+
+        {%- case block.type -%}
+          {%- when 'link_list' -%}
+            {%- if block.settings.menu != blank -%}
+              <ul>
+                {%- for link in block.settings.menu.links -%}
+                  <li>
+                    <a href="{{ link.url }}">
+                      {{ link.title | escape }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+        {%- endcase -%}
       </div>
-    </div>
+    {%- endfor -%}
 
-    <div
-      class="footer-bottom row align-items-center"
-      style="display: flex; flex-wrap: wrap; margin-right: -15px; margin-left: -15px;"
-    >
-      <p
-        class="footer-text m-0"
-        style="flex: 0 0 66.666667%; max-width: 66.666667%; padding-right: 15px; padding-left: 15px;"
-      >
-        &copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url }}. All rights reserved
-      </p>
-      <div
-        class="footer-social"
-        style="flex: 0 0 33.333333%; max-width: 33.333333%; padding-right: 15px; padding-left: 15px; text-align: right;"
-      >
-        {%- if settings.social_facebook_link != blank -%}
-          <a href="{{ settings.social_facebook_link }}"><i class="fa fa-facebook"></i></a>
-        {%- endif -%}
-        {%- if settings.social_twitter_link != blank -%}
-          <a href="{{ settings.social_twitter_link }}"><i class="fa fa-twitter"></i></a>
-        {%- endif -%}
-        {%- if settings.social_instagram_link != blank -%}
-          <a href="{{ settings.social_instagram_link }}"><i class="fa fa-instagram"></i></a>
-        {%- endif -%}
-        {%- if settings.social_pinterest_link != blank -%}
-          <a href="{{ settings.social_pinterest_link }}"><i class="fa fa-pinterest"></i></a>
-        {%- endif -%}
-      </div>
+    <div class="footer-column newsletter">
+      {%- if section.settings.newsletter_enable -%}
+        <h4>{{ section.settings.newsletter_heading }}</h4>
+        <p class="newsletter-content">{{ section.settings.newsletter_description }}</p>
+        {%- form 'customer', id: 'ContactFooter', class: 'footer-form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <input
+            class="footer-input"
+            name="contact[email]"
+            placeholder="{{ 'newsletter.label' | t }}"
+            required
+            type="email"
+          >
+          <button class="footer-button" type="submit">{{ 'newsletter.button_label' | t }}</button>
+        {%- endform -%}
+        <p class="newsletter-content" style="margin-top: 20px;">{{ section.settings.company_address }}</p>
+      {%- endif -%}
     </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      Copyright &copy; {{ 'now' | date: '%Y' }} All rights reserved | This template is made with
+      <span style="color: #f42f2c;">♥</span> by {{ section.settings.company_name }}
+    </p>
   </div>
 </footer>
 
 {% schema %}
 {
-  "name": "t:sections.footer.name",
+  "name": "Footer",
   "blocks": [
     {
       "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
+      "name": "Link list",
       "settings": [
         {
           "type": "text",
           "id": "heading",
-          "default": "Quick Links",
-          "label": "Heading"
+          "label": "Heading",
+          "default": "Column Title"
         },
         {
           "type": "link_list",
           "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label"
+          "label": "Menu",
+          "default": "footer"
         }
       ]
     }
@@ -208,7 +189,7 @@
       "type": "checkbox",
       "id": "newsletter_enable",
       "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
+      "label": "Enable newsletter"
     },
     {
       "type": "text",
@@ -219,12 +200,24 @@
     {
       "type": "text",
       "id": "newsletter_description",
-      "default": "You can trust us. we only send promo offers,",
+      "default": "You can trust us, we only send promo offers.",
       "label": "Description"
     },
     {
+      "type": "text",
+      "id": "company_address",
+      "default": "Your Firm Address",
+      "label": "Company Address"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "default": "Coleville",
+      "label": "Company Name"
+    },
+    {
       "type": "header",
-      "content": "t:sections.all.spacing"
+      "content": "Spacing"
     },
     {
       "type": "range",
@@ -233,7 +226,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.footer.settings.margin_top.label",
+      "label": "Margin top",
       "default": 0
     },
     {
@@ -243,8 +236,8 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 80
+      "label": "Padding top",
+      "default": 60
     },
     {
       "type": "range",
@@ -253,7 +246,7 @@
       "max": 100,
       "step": 4,
       "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
+      "label": "Padding bottom",
       "default": 20
     }
   ],
