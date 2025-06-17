@@ -1,85 +1,122 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-lg-12">
-      <div class="main_title">
-        <h2>
-          <span>New Products</span>
-        </h2>
-        <p>Bring called seed first of third give itself now ment</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    {% assign featured_product = collections.all.products.first %}
-    <div class="col-lg-6">
-      <div class="new_product">
-        <h5 class="text-uppercase">Featured Product</h5>
-        <h3 class="text-uppercase">{{ featured_product.title }}</h3>
-        <div class="product-img">
-          <img
-            class="img-fluid"
-            src="{{ featured_product.featured_image | img_url: 'large' }}"
-            alt="{{ featured_product.title }}" />
+<section class="new_product_area section_gap_top section_gap_bottom_custom">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="main_title">
+          <h2><span>new products</span></h2>
+          <p>Bring called seed first of third give itself now ment</p>
         </div>
-        <h4>{{ featured_product.price | money }}</h4>
-        <a href="{{ featured_product.url }}" class="main_btn">Add to cart</a>
       </div>
     </div>
 
-    <div class="col-lg-6 mt-5 mt-lg-0">
-      <div class="row">
-        {% for product in collections.all.products limit: 4 offset: 1 %}
-          <div class="col-lg-6 col-md-6">
-            <div class="single-product">
-              <div class="product-img">
-                <img
-                  class="img-fluid w-100"
-                  src="{{ product.featured_image | img_url: 'large' }}"
-                  alt="{{ product.title }}" />
-                <div class="p_icon">
-                  <a href="{{ product.url }}">
-                    <i class="fa-solid fa-eye"></i>
-                  </a>
-                  <a href="#" onclick="addToWishlist('{{ product.id }}')">
-                    <i class="fa-regular fa-heart"></i>
-                  </a>
-                  <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </a>
+    <div class="row align-items-stretch">
+      {% assign featured_product = collections.all.products.first %}
+      <div class="col-lg-6 d-flex">
+        <div class="new_product custom-featured-box w-100">
+          <div>
+            <h5 class="text-uppercase">Featured Product</h5>
+            <h3 class="text-uppercase">{{ featured_product.title }}</h3>
+            <div class="product-img">
+              <img class="img-fluid" src="{{ featured_product.featured_image | img_url: 'large' }}" alt="{{ featured_product.title }}" />
+            </div>
+            <h4>{{ featured_product.price | money }}</h4>
+          </div>
+          <a href="{{ featured_product.url }}" class="main_btn mt-3">Add to cart</a>
+        </div>
+      </div>
+
+      <div class="col-lg-6 mt-5 mt-lg-0 d-flex">
+        <div class="row w-100 align-self-stretch">
+          {% for product in collections.all.products offset: 1 limit: 4 %}
+            <div class="col-md-6 d-flex mb-4">
+              <div class="single-product w-100 d-flex flex-column justify-content-between">
+                <div class="product-img">
+                  <img class="img-fluid w-100" src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}" />
+                  <div class="p_icon">
+                    <a href="{{ product.url }}">
+                      <i class="ti-eye"></i>
+                    </a>
+                    <a href="#" onclick="addToWishlist('{{ product.id }}')">
+                      <i class="ti-heart"></i>
+                    </a>
+                    <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
+                      <i class="ti-shopping-cart"></i>
+                    </a>
+                  </div>
                 </div>
-              </div>
-              <div class="product-btm">
-                <a href="{{ product.url }}" class="d-block">
-                  <h4>{{ product.title }}</h4>
-                </a>
-                <div class="mt-3">
-                  <span class="mr-4">{{ product.price | money }}</span>
-                  {% if product.compare_at_price > product.price %}
-                    <del>{{ product.compare_at_price | money }}</del>
-                  {% endif %}
+                <div class="product-btm">
+                  <a href="{{ product.url }}" class="d-block">
+                    <h4>{{ product.title }}</h4>
+                  </a>
+                  <div class="mt-3">
+                    <span class="mr-4">{{ product.price | money }}</span>
+                    {% if product.compare_at_price > product.price %}
+                      <del>{{ product.compare_at_price | money }}</del>
+                    {% endif %}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <style>
+    .custom-featured-box {
+      background: #fff;
+      padding: 20px 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid #eee;
+    }
+
+    .single-product {
+      background: #fff;
+      border: 1px solid #eee;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .single-product .product-img {
+      position: relative;
+    }
+
+    .single-product .p_icon {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .single-product:hover .p_icon {
+      opacity: 1;
+    }
+
+    @media (max-width: 991px) {
+      .new_product_area .row > .col-lg-6 {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</section>
 
 {% schema %}
-  {
-    "name": "New Products Section",
-    "tag": "section",
-    "class": "new_product_area section_gap_top section_gap_bottom_custom",
-    "settings": [],
-    "blocks": [],
-    "presets": [
-      {
-        "name": "New Products"
-      }
-    ]
-  }
+{
+  "name": "New Products Section",
+  "tag": "section",
+  "class": "new_product_area section_gap_top section_gap_bottom_custom",
+  "settings": [],
+  "blocks": [],
+  "presets": [
+    {
+      "name": "New Products"
+    }
+  ]
+}
 {% endschema %}
