@@ -1,6 +1,144 @@
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Blogs New",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Latest Blog"
+    },
+    {
+      "type": "text",
+      "id": "section_subtitle",
+      "label": "Section Subtitle",
+      "default": "Bring called seed first of third give itself now ment"
+    }
+  ],
+  "blocks": [],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Blogs New"
+    }
+  ]
+}
 {% endschema %}
+
+<style>
+  .blogs-new {
+    padding: 80px 0;
+    background: #fff;
+  }
+  .blogs-new .main_title {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .blogs-new .main_title h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #111;
+  }
+  .blogs-new .main_title p {
+    color: #777;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  .blogs-new .single-blog {
+    background: #fff;
+    margin-bottom: 30px;
+  }
+  .blogs-new .single-blog .thumb img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .blogs-new .short_details {
+    padding: 15px 0;
+  }
+  .blogs-new .meta-top {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 15px;
+  }
+  .blogs-new .meta-top a {
+    color: #999;
+    font-size: 13px;
+    text-decoration: none;
+  }
+  .blogs-new .blog-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+  }
+  .blogs-new .blog-title:hover {
+    color: #4caf50;
+  }
+  .blogs-new .text-wrap p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 15px;
+  }
+  .blogs-new .blog_btn {
+    font-size: 13px;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  .blogs-new .blog_btn:hover {
+    color: #4caf50;
+  }
+  .ml-2 {
+    margin-left: 5px;
+  }
+</style>
+
+<section class="blogs-new">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="main_title">
+          <h2>{{ section.settings.section_title }}</h2>
+          <p>{{ section.settings.section_subtitle }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      {% assign blog_handle = blogs.news %}
+      {% for article in blog_handle.articles limit: 3 %}
+        <div class="col-lg-4 col-md-6">
+          <div class="single-blog">
+            <div class="thumb">
+              <a href="{{ article.url }}">
+                <img class="img-fluid" src="{{ article.image | img_url: '720x480' }}" alt="{{ article.title }}">
+              </a>
+            </div>
+            <div class="short_details">
+              <div class="meta-top">
+                <a href="#">By {{ article.author }}</a>
+                <a href="#"><i class="ti-comments-smiley"></i> {{ article.comments_count }} Comments</a>
+              </div>
+              <a class="d-block" href="{{ article.url }}">
+                <h4 class="blog-title">{{ article.title }}</h4>
+              </a>
+              <div class="text-wrap">
+                <p>{{ article.excerpt | strip_html | truncate: 100 }}</p>
+              </div>
+              <a href="{{ article.url }}" class="blog_btn">LEARN MORE <span class="ml-2 ti-arrow-right"></span></a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Themify icons -->
+<link href="https://cdn.jsdelivr.net/npm/themify-icons@0.1.2/css/themify-icons.css" rel="stylesheet">
