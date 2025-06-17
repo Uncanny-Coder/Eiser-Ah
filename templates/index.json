@@ -193,24 +193,6 @@
         "collection": "all",
         "product_limit": 8
       }
-    },
-    "featured_blog_QPKcKp": {
-      "type": "featured-blog",
-      "name": "t:sections.featured-blog.presets.name",
-      "settings": {
-        "blog": "",
-        "post_limit": 3,
-        "heading": "Blog posts",
-        "heading_size": "h1",
-        "columns_desktop": 3,
-        "show_view_all": true,
-        "show_image": true,
-        "show_date": true,
-        "show_author": false,
-        "color_scheme": "",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
     }
   },
   "order": [
@@ -219,7 +201,6 @@
     "featured_products_RhJWVy",
     "img_banner_2_cPME98",
     "newproducts_e89JzE",
-    "inspires_products_AV3xUY",
-    "featured_blog_QPKcKp"
+    "inspires_products_AV3xUY"
   ]
 }
