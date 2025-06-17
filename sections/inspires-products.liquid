@@ -12,30 +12,37 @@
     </div>
 
     <div class="row">
-      {% assign collection_handle = section.settings.product_collection | default: 'all' %}
-      {% assign collection = collections[collection_handle] %}
-      {% assign products = collection.products | slice: 0, section.settings.product_limit %}
+      {% assign collection_products = collections['all'].products | slice: 0, section.settings.product_limit %}
 
-      {% for product in products %}
+      {% for product in collection_products %}
         <div class="col-lg-3 col-md-6">
           <div class="single-product">
             <div class="product-img">
               <a href="{{ product.url }}">
                 <img
                   class="img-fluid w-100"
-                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  src="{{ product.featured_image | image_url: width: 400 }}"
                   alt="{{ product.title }}">
               </a>
               <div class="p_icon">
                 <a href="{{ product.url }}">
                   <i class="ti-eye"></i>
                 </a>
-                <a href="#">
+                <a
+                  href="#"
+                  class="add-to-wishlist"
+                  data-product-id="{{ product.id }}">
                   <i class="ti-heart"></i>
                 </a>
-                <a href="/cart/add?id={{ product.variants.first.id }}">
-                  <i class="ti-shopping-cart"></i>
-                </a>
+                <form method="post" action="/cart/add">
+                  <input
+                    type="hidden"
+                    name="id"
+                    value="{{ product.variants.first.id }}">
+                  <button type="submit" class="border-0 bg-transparent p-0">
+                    <i class="ti-shopping-cart"></i>
+                  </button>
+                </form>
               </div>
             </div>
             <div class="product-btm">
