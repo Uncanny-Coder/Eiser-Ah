@@ -199,13 +199,11 @@
       "name": "Latest Blog Posts",
       "settings": {
         "heading": "Latest Blog",
-        "blog": "10-easy-recipes-for-busy-weeknights",
         "subheading": "Bring called seed first of third give itself now ment",
-        "layout": "grid",
+        "blog": "news",
         "show_image": true,
-        "image_height": "medium",
         "show_date": true,
-        "show_author": false,
+        "show_author": true,
         "padding_top": 36,
         "padding_bottom": 36
       }
