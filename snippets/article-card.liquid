@@ -151,3 +151,62 @@
       </div>
     </div>
 {%- endif -%}
+
+{% style %}
+      .article-card-custom {
+    font-family: 'Segoe UI', sans-serif;
+    border: 1px solid #eee;
+    padding: 1.5rem;
+    background-color: white;
+  }
+
+  .article-card__image-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .article-card__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .article-card__meta {
+    font-size: 0.875rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+  }
+
+  .article-card__title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+  }
+
+  .article-card__title a {
+    text-decoration: none;
+    color: #222;
+  }
+
+  .article-card__excerpt {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.5rem 0 1rem;
+  }
+
+  .article-card__link {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: #000;
+  }
+
+  .article-card__link .arrow {
+    display: inline-block;
+    transition: transform 0.3s;
+  }
+
+  .article-card__link:hover .arrow {
+    transform: translateX(4px);
+  }
+{% endstyle %}
