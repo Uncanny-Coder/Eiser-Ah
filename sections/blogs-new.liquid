@@ -2,7 +2,7 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
+<style>
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
@@ -14,50 +14,146 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
-{%- endstyle -%}
 
-{% assign current_blog = section.settings.blog %}
-{% if current_blog != blank %}
-  {%- paginate current_blog.articles by 3 -%}
-    <section class="blogs-new section-{{ section.id }}-padding page-width">
-      <div class="text-center">
-        <h2 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-          {{ section.settings.heading | default: current_blog.title | escape }}
-        </h2>
-        {% if section.settings.subheading != blank %}
-          <p class="subtitle">
-            {{ section.settings.subheading }}
-          </p>
-        {% endif %}
-      </div>
+  .blog-section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+  }
 
-      <div class="grid grid--1-col-tablet-down grid--3-col-desktop blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-        {%- for article in current_blog.articles -%}
-          <div
-            class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade style="--animation-order: {{ forloop.index }};"
-            {% endif %}
-          >
-            {%- render 'article-card',
-              article: article,
-              media_height: section.settings.image_height,
-              media_aspect_ratio: article.image.aspect_ratio,
-              show_image: section.settings.show_image,
-              show_date: section.settings.show_date,
-              show_author: section.settings.show_author,
-              show_excerpt: true
-            -%}
-          </div>
-        {%- endfor -%}
-      </div>
+  .blog-heading {
+    font-size: 2.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
 
-      {%- if paginate.pages > 1 -%}
-        {%- render 'pagination', paginate: paginate -%}
-      {%- endif -%}
-    </section>
-  {%- endpaginate -%}
-{% endif %}
+  .blog-subheading {
+    font-size: 1rem;
+    color: #6c6c6c;
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-articles-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+
+  .article-card-custom {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+    text-align: left;
+    transition: transform 0.3s ease;
+  }
+
+  .article-card-custom:hover {
+    transform: translateY(-5px);
+  }
+
+  .article-card__image-wrapper {
+    margin-bottom: 1rem;
+  }
+
+  .article-card__image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
+  .article-card__meta {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 0.4rem;
+  }
+
+  .article-card__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0.5rem 0;
+  }
+
+  .article-card__title a {
+    color: #222;
+    text-decoration: none;
+  }
+
+  .article-card__excerpt {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1rem;
+  }
+
+  .article-card__link {
+    color: #007ace;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .article-card__link .arrow {
+    margin-left: 5px;
+  }
+</style>
+
+<div class="section-{{ section.id }}-padding">
+  <div class="blog-section-container">
+    <h2 class="blog-heading">{{ section.settings.heading }}</h2>
+    <p class="blog-subheading">{{ section.settings.subheading }}</p>
+
+    {% assign current_blog = section.settings.blog %}
+    {% if current_blog != blank %}
+      {% paginate current_blog.articles by 3 %}
+        <div class="blog-articles-grid">
+          {% for article in current_blog.articles %}
+            <div class="article-card-custom">
+              {% if section.settings.show_image and article.image %}
+                <div class="article-card__image-wrapper">
+                  <img
+                    src="{{ article.image.src | image_url: width: 600 }}"
+                    alt="{{ article.image.alt | escape }}"
+                    loading="lazy"
+                    class="article-card__image"
+                    width="{{ article.image.width }}"
+                    height="{{ article.image.height }}"
+                  >
+                </div>
+              {% endif %}
+
+              <div class="article-card__meta">
+                {% if section.settings.show_date %}
+                  <span>{{ article.published_at | date: '%B %d, %Y' }}</span>
+                {% endif %}
+                {% if section.settings.show_author %}
+                  <span class="meta-divider">·</span>
+                  <span>By {{ article.author }}</span>
+                {% endif %}
+              </div>
+
+              <h3 class="article-card__title">
+                <a href="{{ article.url }}">{{ article.title | truncate: 60 }}</a>
+              </h3>
+
+              <p class="article-card__excerpt">
+                {% if article.excerpt.size > 0 %}
+                  {{ article.excerpt | strip_html | truncatewords: 20 }}
+                {% else %}
+                  {{ article.content | strip_html | truncatewords: 20 }}
+                {% endif %}
+              </p>
+
+              <a class="article-card__link" href="{{ article.url }}"> Learn More <span class="arrow">→</span> </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% endpaginate %}
+    {% else %}
+      <p>No blog selected or no articles found.</p>
+    {% endif %}
+  </div>
+</div>
 
 {% schema %}
 {
@@ -72,43 +168,21 @@
       "default": "Latest Blog"
     },
     {
-      "type": "blog",
-      "id": "blog",
-      "label": "Select blog"
-    },
-    {
       "type": "text",
       "id": "subheading",
       "label": "Subheading",
       "default": "Bring called seed first of third give itself now ment"
     },
     {
-      "type": "select",
-      "id": "layout",
-      "options": [
-        { "value": "grid", "label": "Grid" },
-        { "value": "collage", "label": "Collage" }
-      ],
-      "default": "grid",
-      "label": "Layout"
+      "type": "blog",
+      "id": "blog",
+      "label": "Select blog"
     },
     {
       "type": "checkbox",
       "id": "show_image",
       "default": true,
       "label": "Show article image"
-    },
-    {
-      "type": "select",
-      "id": "image_height",
-      "options": [
-        { "value": "adapt", "label": "Adapt to image" },
-        { "value": "small", "label": "Small" },
-        { "value": "medium", "label": "Medium" },
-        { "value": "large", "label": "Large" }
-      ],
-      "default": "medium",
-      "label": "Image height"
     },
     {
       "type": "checkbox",
