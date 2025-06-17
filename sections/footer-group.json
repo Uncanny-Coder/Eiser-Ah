@@ -10,6 +10,57 @@
 {
   "name": "t:sections.footer.name",
   "type": "footer",
-  "sections": {},
-  "order": []
+  "sections": {
+    "footer_HFHAqn": {
+      "type": "footer",
+      "blocks": {
+        "link_list_kQ4tfp": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Top Products",
+            "menu": "footer"
+          }
+        },
+        "link_list_Fyp9fD": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Quick Links",
+            "menu": "footer"
+          }
+        },
+        "link_list_FfczD6": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Features",
+            "menu": "footer"
+          }
+        },
+        "link_list_pfTMHH": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Resources",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_kQ4tfp",
+        "link_list_Fyp9fD",
+        "link_list_FfczD6",
+        "link_list_pfTMHH"
+      ],
+      "name": "Footer",
+      "settings": {
+        "newsletter_enable": true,
+        "newsletter_heading": "Newsletter",
+        "newsletter_description": "You can trust us. we only send promo offers,",
+        "margin_top": 0,
+        "padding_top": 80,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "footer_HFHAqn"
+  ]
 }
