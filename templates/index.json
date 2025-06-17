@@ -188,9 +188,9 @@
       "type": "inspires-products",
       "name": "Inspired Products",
       "settings": {
-        "section_heading": "Inspired products",
-        "section_subheading": "Bring called seed first of third give itself now ment",
-        "product_collection": "frontpage",
+        "title": "Inspired Products",
+        "subtitle": "Bring called seed first of third give itself now ment",
+        "collection": "all",
         "product_limit": 7
       }
     },
