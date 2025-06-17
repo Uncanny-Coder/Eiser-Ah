@@ -193,6 +193,22 @@
         "collection": "all",
         "product_limit": 8
       }
+    },
+    "blogs_new_CBQdym": {
+      "type": "blogs-new",
+      "name": "Latest Blog Posts",
+      "settings": {
+        "heading": "Latest Blog",
+        "blog": "",
+        "subheading": "Bring called seed first of third give itself now ment",
+        "layout": "grid",
+        "show_image": true,
+        "image_height": "medium",
+        "show_date": true,
+        "show_author": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -201,6 +217,7 @@
     "featured_products_RhJWVy",
     "img_banner_2_cPME98",
     "newproducts_e89JzE",
-    "inspires_products_AV3xUY"
+    "inspires_products_AV3xUY",
+    "blogs_new_CBQdym"
   ]
 }
