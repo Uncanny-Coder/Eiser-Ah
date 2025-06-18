@@ -1,5 +1,13 @@
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
+<script>
+    center: {
+    lat: parseFloat({{ section.settings.map_latitude }}),
+    lng: parseFloat({{ section.settings.map_longitude }})
+  },
+  zoom: parseInt({{ section.settings.map_zoom }})
+</script>
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
