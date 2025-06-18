@@ -520,3 +520,22 @@
   background-color: transparent !important;
   color: #71cd14 !important;
 }
+
+@media screen and (max-width: 749px) {
+  #Banner-{{ section.id }} .banner__content {
+    text-align: left !important;
+    justify-content: flex-start !important;
+  }
+
+  #Banner-{{ section.id }} .banner__box {
+    max-width: 90%;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  #Banner-{{ section.id }} .banner__heading,
+  #Banner-{{ section.id }} .banner__text,
+  #Banner-{{ section.id }} .banner__buttons {
+    text-align: left !important;
+  }
+}
