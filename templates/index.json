@@ -51,7 +51,9 @@
         "text_p3TCHM",
         "buttons_j8TCRb"
       ],
-      "custom_css": [],
+      "custom_css": [
+        "@media screen and (max-width: 749px) {h2 {font-size: 25px !important; }.banner__buttons .button {padding: 10px 15px !important; }}"
+      ],
       "settings": {
         "image": "shopify://shop_images/banner-bg.jpg",
         "image_overlay_opacity": 0,
