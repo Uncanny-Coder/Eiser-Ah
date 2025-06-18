@@ -73,76 +73,200 @@
   .blog_btn:hover {
     color: #4CAF50;
   }
-
 {% endstyle %}
 
 {%- paginate blog.articles by 6 -%}
-  <section class="blog-area section-gap">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-12">
-          <div class="main_title text-center">
-            <h2>LATEST BLOG</h2>
-            <p>Bring called seed first of third give itself now ment</p>
+  <section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="container">
+        <div class="banner_content d-md-flex justify-content-between align-items-center">
+          <div class="mb-3 mb-md-0">
+            <h2>{{ blog.title }}</h2>
+            <p>{{ blog.description }}</p>
+          </div>
+          <div class="page_link">
+            <a href="{{ routes.root_url }}">Home</a>
+            <a href="{{ blog.url }}">Blog</a>
           </div>
         </div>
-      </div>
-
-      <div class="row">
-        <!-- Blog card start -->
-        <div class="col-lg-4 col-md-6">
-          <div class="single-blog">
-            <div class="thumb">
-              <img
-                class="img-fluid"
-                src="img/b1.jpg"
-                alt="Blog Image">
-            </div>
-            <div class="short_details">
-              <div class="meta-top d-flex">
-                <a href="#">By Admin</a>
-                <a href="#">
-                  <i class="ti-comments-smiley"></i>
-                  2 Comments</a>
-              </div>
-              <a class="d-block" href="#">
-                <h4 class="blog-title">Ford clever bed stops your sleeping partner hogging the whole</h4>
-              </a>
-              <div class="text-wrap">
-                <p>
-                  Let one fifth i bring fly to divided face for bearing the divide unto seed winged divided light Forth.
-                </p>
-              </div>
-              <a href="#" class="blog_btn">LEARN MORE
-                <span class="ml-2 ti-arrow-right"></span>
-              </a>
-            </div>
-          </div>
-        </div>
-      <!-- Repeat for more blog cards -->
       </div>
     </div>
   </section>
 
+  <section class="blog_area section_gap">
+    <div class="container">
+      <div class="row">
+        <!-- Blog Posts Column -->
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          <div class="blog_left_sidebar">
+            {% for article in blog.articles %}
+              <article class="blog_item">
+                <div class="blog_item_img">
+                  {% if article.image %}
+                    <img
+                      class="card-img rounded-0"
+                      src="{{ article.image | image_url: width: 730 }}"
+                      alt="{{ article.image.alt | escape }}"
+                    >
+                  {% endif %}
+                  <a href="{{ article.url }}" class="blog_item_date">
+                    <h3>{{ article.published_at | date: '%d' }}</h3>
+                    <p>{{ article.published_at | date: '%b' }}</p>
+                  </a>
+                </div>
+
+                <div class="blog_details">
+                  <a class="d-inline-block" href="{{ article.url }}">
+                    <h2>{{ article.title }}</h2>
+                  </a>
+                  <p>{{ article.excerpt | strip_html | truncate: 200 }}</p>
+                  <ul class="blog-info-link">
+                    <li>
+                      <a href="#"
+                        ><i class="ti-user"></i>
+                        {% if article.author %}
+                          {{ article.author }}
+                        {% endif %}
+                      </a>
+                    </li>
+                    <li>
+                      <a href="{{ article.url }}#comments"
+                        ><i class="ti-comments"></i> {{ article.comments_count }} Comments</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            {% endfor %}
+
+            <!-- Pagination -->
+            {% paginate blog.articles by 5 %}
+              <nav class="blog-pagination justify-content-center d-flex">
+                <ul class="pagination">
+                  {% if paginate.previous %}
+                    <li class="page-item">
+                      <a href="{{ paginate.previous.url }}" class="page-link" aria-label="Previous">
+                        <span aria-hidden="true"><span class="ti-arrow-left"></span></span>
+                      </a>
+                    </li>
+                  {% endif %}
+
+                  {% for part in paginate.parts %}
+                    <li class="page-item {% if part.is_link == false %}active{% endif %}">
+                      {% if part.is_link %}
+                        <a href="{{ part.url }}" class="page-link">{{ part.title }}</a>
+                      {% else %}
+                        <span class="page-link">{{ part.title }}</span>
+                      {% endif %}
+                    </li>
+                  {% endfor %}
+
+                  {% if paginate.next %}
+                    <li class="page-item">
+                      <a href="{{ paginate.next.url }}" class="page-link" aria-label="Next">
+                        <span aria-hidden="true"><span class="ti-arrow-right"></span></span>
+                      </a>
+                    </li>
+                  {% endif %}
+                </ul>
+              </nav>
+            {% endpaginate %}
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="col-lg-4">
+          <div class="blog_right_sidebar">
+            <!-- Search Widget -->
+            <aside class="single_sidebar_widget search_widget">
+              <form action="/search" method="get">
+                <div class="form-group">
+                  <div class="input-group mb-3">
+                    <input type="text" name="q" class="form-control" placeholder="Search Keyword">
+                    <div class="input-group-append">
+                      <button class="btn" type="submit"><i class="ti-search"></i></button>
+                    </div>
+                  </div>
+                </div>
+                <button class="main_btn rounded-0 w-100" type="submit">Search</button>
+              </form>
+            </aside>
+
+            <!-- Recent Posts (from same blog) -->
+            <aside class="single_sidebar_widget popular_post_widget">
+              <h3 class="widget_title">Recent Posts</h3>
+              {% for article in blog.articles limit: 4 %}
+                <div class="media post_item">
+                  {% if article.image %}
+                    <img src="{{ article.image | image_url: width: 80 }}" alt="{{ article.title }}">
+                  {% endif %}
+                  <div class="media-body">
+                    <a href="{{ article.url }}">
+                      <h3>{{ article.title | truncate: 30 }}</h3>
+                    </a>
+                    <p>{{ article.published_at | date: '%B %d, %Y' }}</p>
+                  </div>
+                </div>
+              {% endfor %}
+            </aside>
+
+            <!-- Tag Cloud (using blog tags) -->
+            {% assign tags = blog.all_tags %}
+            {% if tags.size > 0 %}
+              <aside class="single_sidebar_widget tag_cloud_widget">
+                <h4 class="widget_title">Tag Clouds</h4>
+                <ul class="list">
+                  {% for tag in tags %}
+                    <li>
+                      <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </aside>
+            {% endif %}
+
+            <!-- Newsletter -->
+            <aside class="single_sidebar_widget newsletter_widget">
+              <h4 class="widget_title">Newsletter</h4>
+              <form
+                method="post"
+                action="/contact#contact_form"
+                id="contact_form"
+                accept-charset="UTF-8"
+                class="contact-form"
+              >
+                <input type="hidden" name="form_type" value="customer">
+                <input type="hidden" name="utf8" value="✓">
+                <div class="form-group">
+                  <input type="email" name="contact[email]" class="form-control" placeholder="Enter email" required>
+                </div>
+                <button class="main_btn rounded-0 w-100" type="submit">Subscribe</button>
+              </form>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 {%- endpaginate -%}
 
 {% schema %}
-  {
-    "name": "Custom Blog Area",
-    "tag": "section",
-    "class": "section",
-    "settings": [
-      {
-        "type": "checkbox",
-        "id": "show_author",
-        "label": "Show author name",
-        "default": true
-      }
-    ],
-    "presets": [
-      {
-        "name": "Blog Area"
-      }
-    ]
-  }
+{
+  "name": "Custom Blog Area",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "Show author name",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blog Area"
+    }
+  ]
+}
 {% endschema %}
