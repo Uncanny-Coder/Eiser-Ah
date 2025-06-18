@@ -107,10 +107,20 @@
     color: #666;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 767px) {
     .logo-block {
       flex: 0 0 calc(50% - 20px);
       max-width: calc(50% - 20px);
+      padding: 8px;
+    }
+
+    .logo-blocks {
+      gap: 15px;
+      padding: 20px 0;
+    }
+
+    .logo-block i {
+      font-size: 20px;
     }
 
     .logo-block h3 {
@@ -119,17 +129,6 @@
 
     .logo-block p {
       font-size: 10px;
-    }
-
-    .logo-block i {
-      font-size: 22px;
-    }
-  }
-
-  @media screen and (max-width: 480px) {
-    .logo-block {
-      flex: 0 0 100%;
-      max-width: 100%;
     }
   }
 {% endstylesheet %}
