@@ -1,16 +1,100 @@
 {{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+    .contact-section {
+    padding: 40px 0;
   }
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .page-header .left h2 {
+    margin-bottom: 5px;
+    font-size: 28px;
+  }
+
+  .page-header .right {
+    font-size: 14px;
+    color: #999;
+  }
+
+  .map-wrapper {
+    border: 1px solid #000;
+    margin-bottom: 40px;
+  }
+
+  #map {
+    height: 300px;
+    width: 100%;
+  }
+
+  .form-info-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  .contact-form-container {
+    flex: 1 1 60%;
+  }
+
+  .contact-form-container .form-control {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+
+  .contact-form-container .form-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .contact-info-container {
+    flex: 1 1 35%;
+  }
+
+  .contact-info-block {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+
+  .contact-info-block i {
+    font-size: 20px;
+    color: #63bc46;
+    margin-top: 5px;
+  }
+
+  .green-button {
+    background-color: #63bc46;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-weight: bold;
+    border-radius: 3px;
+    transition: 0.3s;
+  }
+
+  .green-button:hover {
+    background-color: #4ea536;
   }
 {%- endstyle -%}
 
