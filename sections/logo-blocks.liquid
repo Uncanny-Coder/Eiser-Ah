@@ -74,6 +74,7 @@
 {% stylesheet %}
   .logo-blocks {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     padding: 30px 0;
@@ -107,13 +108,27 @@
   }
 
   @media screen and (max-width: 768px) {
-    .logo-blocks {
-      flex-wrap: wrap;
-      justify-content: center;
+    .logo-block {
+      flex: 0 0 calc(50% - 20px);
+      max-width: calc(50% - 20px);
     }
 
+    .logo-block h3 {
+      font-size: 14px;
+    }
+
+    .logo-block p {
+      font-size: 10px;
+    }
+
+    .logo-block i {
+      font-size: 22px;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
     .logo-block {
-      flex: 1 1 100%;
+      flex: 0 0 100%;
       max-width: 100%;
     }
   }
