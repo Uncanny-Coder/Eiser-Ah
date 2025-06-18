@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flaticon@latest/css/flaticon.css">
 
-
 <div class="logo-blocks">
   {% for block in section.blocks %}
     <div class="logo-block">
@@ -14,64 +13,63 @@
 </div>
 
 {% schema %}
-  {
-    "name": "Logo Blocks",
-    "settings": [],
-    "blocks": [
-      {
-        "type": "icon",
-        "name": "Icon Block",
-        "settings": [
-          {
-            "type": "text",
-            "id": "icon_class",
-            "label": "Icon Class",
-            "default": "flaticon-money"
-          }, {
-            "type": "text",
-            "id": "title",
-            "label": "Title",
-            "default": "Money Back Guarantee"
-          }, {
-            "type": "text",
-            "id": "description",
-            "label": "Description",
-            "default": "Shall open divide a one"
+{
+  "name": "Logo Blocks",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon_class",
+          "label": "Icon Class",
+          "default": "flaticon-money"
+        }, {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Money Back Guarantee"
+        }, {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Shall open divide a one"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo Blocks",
+      "blocks": [
+        {
+          "type": "icon",
+          "settings": {
+            "icon_class": "flaticon-money"
           }
-        ]
-      }
-    ],
-    "presets": [
-      {
-        "name": "Logo Blocks",
-        "blocks": [
-          {
-            "type": "icon",
-            "settings": {
-              "icon_class": "flaticon-money"
-            }
-          }, {
-            "type": "icon",
-            "settings": {
-              "icon_class": "flaticon-truck"
-            }
-          }, {
-            "type": "icon",
-            "settings": {
-              "icon_class": "flaticon-support"
-            }
-          }, {
-            "type": "icon",
-            "settings": {
-              "icon_class": "flaticon-blockchain"
-            }
+        }, {
+          "type": "icon",
+          "settings": {
+            "icon_class": "flaticon-truck"
           }
-        ]
-      }
-    ]
-  }
+        }, {
+          "type": "icon",
+          "settings": {
+            "icon_class": "flaticon-support"
+          }
+        }, {
+          "type": "icon",
+          "settings": {
+            "icon_class": "flaticon-blockchain"
+          }
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
-
 
 {% stylesheet %}
   .logo-blocks {
@@ -108,4 +106,15 @@
     color: #666;
   }
 
+  @media screen and (max-width: 768px) {
+    .logo-blocks {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .logo-block {
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
 {% endstylesheet %}
