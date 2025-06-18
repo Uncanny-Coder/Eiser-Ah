@@ -25,7 +25,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Quick Links",
-            "menu": "footer"
+            "menu": "quick-links"
           }
         },
         "link_list_FfczD6": {
@@ -39,7 +39,7 @@
           "type": "link_list",
           "settings": {
             "heading": "Resources",
-            "menu": "footer"
+            "menu": "resources"
           }
         }
       },
