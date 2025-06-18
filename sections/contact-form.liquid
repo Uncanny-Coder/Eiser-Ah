@@ -208,27 +208,27 @@
 
 {% schema %}
 {
-  "name": "Styled Contact Form",
+  "name": "Contact Section",
   "tag": "section",
-  "class": "section",
+  "class": "contact-section",
   "settings": [
     {
-      "type": "inline_richtext",
+      "type": "text",
       "id": "contact_title",
-      "label": "Contact Heading",
-      "default": "Get in Touch"
+      "label": "Contact Title",
+      "default": "Contact Us"
+    },
+    {
+      "type": "text",
+      "id": "contact_subtitle",
+      "label": "Contact Subtitle",
+      "default": "Very us move be blessed multiply night"
     },
     {
       "type": "text",
       "id": "button_text",
-      "label": "Submit Button Text",
+      "label": "Button Text",
       "default": "Send Message"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Color Scheme",
-      "default": "background-1"
     },
     {
       "type": "checkbox",
@@ -245,7 +245,7 @@
       "type": "text",
       "id": "map_latitude",
       "label": "Map Latitude",
-      "default": "-31.197"
+      "default": "31.197"
     },
     {
       "type": "text",
@@ -254,11 +254,9 @@
       "default": "150.744"
     },
     {
-      "type": "range",
+      "type": "number",
       "id": "map_zoom",
       "label": "Map Zoom Level",
-      "min": 1,
-      "max": 20,
       "default": 9
     }
   ],
@@ -270,43 +268,34 @@
         {
           "type": "text",
           "id": "icon_class",
-          "label": "Icon Class",
-          "default": "ti-home"
+          "label": "Icon Class (FontAwesome)",
+          "default": "fa fa-map-marker"
         },
         {
           "type": "text",
           "id": "heading",
           "label": "Heading",
-          "default": "Buttonwood, California"
+          "default": "123 Street, City"
         },
         {
-          "type": "text",
+          "type": "textarea",
           "id": "text",
           "label": "Text",
-          "default": "Rosemead, CA 91770"
+          "default": "Some additional info here"
         },
         {
           "type": "url",
           "id": "link",
-          "label": "Link (optional)"
+          "label": "Optional Link"
         }
       ]
     }
   ],
+  "max_blocks": 4,
   "presets": [
     {
-      "name": "Styled Contact Form",
-      "blocks": [
-        {
-          "type": "contact_info"
-        },
-        {
-          "type": "contact_info"
-        },
-        {
-          "type": "contact_info"
-        }
-      ]
+      "name": "Contact Section",
+      "category": "Contact"
     }
   ]
 }
