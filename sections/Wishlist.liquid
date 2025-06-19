@@ -94,6 +94,46 @@
         productEl.style.display = 'none';
       }
     });
+     function getWishlist() {
+    return JSON.parse(localStorage.getItem('wishlist') || '[]');
+  }
+
+  function saveWishlist(wishlist) {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }
+
+  function removeFromWishlist(productId) {
+    const wishlist = getWishlist();
+    const updatedWishlist = wishlist.filter(id => id !== String(productId));
+    saveWishlist(updatedWishlist);
+    renderWishlist();
+  }
+
+  function renderWishlist() {
+    const wishlist = getWishlist();
+    const allProducts = document.querySelectorAll('.wishlist-product');
+    const emptyMessage = document.getElementById('wishlist-empty-message');
+    const returnBtn = document.getElementById('return-to-shopping');
+
+    if (wishlist.length === 0) {
+      emptyMessage.classList.remove('d-none');
+      returnBtn.classList.remove('d-none');
+    } else {
+      emptyMessage.classList.add('d-none');
+      returnBtn.classList.add('d-none');
+    }
+
+    allProducts.forEach(productEl => {
+      const productId = productEl.dataset.productId;
+      if (wishlist.includes(productId)) {
+        productEl.style.display = 'block';
+      } else {
+        productEl.style.display = 'none';
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', renderWishlist);
   }
 
   document.addEventListener('DOMContentLoaded', renderWishlist);
