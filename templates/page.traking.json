@@ -11,13 +11,29 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "contact_form_6UYEgL": {
+      "type": "contact-form",
+      "name": "Contact Section",
+      "settings": {
+        "contact_title": "Tracking",
+        "contact_subtitle": "Track your Products here",
+        "button_text": "Send Message",
+        "show_map": false,
+        "map_api_key": "",
+        "map_latitude": "31.197",
+        "map_longitude": "150.744",
+        "map_zoom": 9
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "contact_form_6UYEgL"
   ]
 }
