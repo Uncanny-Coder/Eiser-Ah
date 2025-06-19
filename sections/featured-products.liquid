@@ -1,3 +1,4 @@
+ia-modal
 <section class="feature_product_area section_gap_bottom_custom">
   <div class="container">
     <div class="row justify-content-center">
@@ -25,6 +26,7 @@
               >
               <div class="p_icon">
                 <a href="{{ product.url }}">
+                  {% render 'product-product-media-modal' %}
                   <i class="fa-solid fa-eye"></i>
                 </a>
                 <a href="#" onclick="addToWishlist('{{ product.id }}')">
