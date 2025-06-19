@@ -14,11 +14,24 @@
       "settings": {
         "title": "Collections",
         "sort": "alphabetical",
-        "image_ratio": "square"
+        "image_ratio": "square",
+        "columns_desktop": 3,
+        "columns_mobile": "2"
+      }
+    },
+    "featured_products_cU8NQH": {
+      "type": "featured-products",
+      "name": "Featured Products",
+      "settings": {
+        "title": "Featured Product",
+        "subtitle": "Bring called seed first of third give itself now ment{{ section.settings.collection.title }}",
+        "collection": "all",
+        "product_limit": 3
       }
     }
   },
   "order": [
-    "main"
+    "main",
+    "featured_products_cU8NQH"
   ]
 }
