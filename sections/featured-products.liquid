@@ -74,6 +74,19 @@ ia-modal
     } else {
       alert('Already on your wishlist.');
     }
+       function addToWishlist(productId) {
+    const wishlist = getWishlist();
+    const idStr = String(productId);
+
+    if (!wishlist.includes(idStr)) {
+      wishlist.push(idStr);
+      saveWishlist(wishlist);
+      alert('Added to wishlist!');
+    } else {
+      alert('Already in wishlist!');
+    }
+  }
+</script>
   }
 </script>
 
