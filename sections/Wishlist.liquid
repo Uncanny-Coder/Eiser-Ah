@@ -5,13 +5,54 @@
         <h2>{{ section.settings.main_heading }}</h2>
         <p id="wishlist-empty-message" class="text-muted d-none">{{ section.settings.empty_text }}</p>
         <a href="{{ section.settings.return_url }}" class="main_btn d-none" id="return-to-shopping">
-          {{- section.settings.return_button_text -}}
+          {{ section.settings.return_button_text }}
         </a>
       </div>
     </div>
 
     <div class="row" id="wishlist-container">
-      <!-- Will be populated by JS -->
+      {% for product in collections.all.products %}
+        <div
+          class="wishlist-product"
+          data-product-id="{{ product.id }}"
+          style="display: none;"
+        >
+          <div class="col-lg-4 col-md-6">
+            <div class="single-product">
+              <div class="product-img">
+                <img
+                  class="img-fluid"
+                  src="{{ product.featured_image | img_url: '500x' }}"
+                  alt="{{ product.title }}"
+                  style="width: 90%;"
+                >
+                <div class="p_icon">
+                  <a href="{{ product.url }}">
+                    <i class="fa-solid fa-eye"></i>
+                  </a>
+                  <a href="#" onclick="removeFromWishlist('{{ product.id }}')">
+                    <i class="fa-solid fa-trash"></i>
+                  </a>
+                  <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1)">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="product-btn">
+                <a href="{{ product.url }}" class="d-block">
+                  <h4>{{ product.title }}</h4>
+                </a>
+                <div class="mt-3">
+                  <span class="mr-4">{{ product.price | money }}</span>
+                  {% if product.compare_at_price > product.price %}
+                    <del>{{ product.compare_at_price | money }}</del>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -25,55 +66,32 @@
     localStorage.setItem('wishlist', JSON.stringify(wishlist));
   }
 
-  window.removeFromWishlist = function(productId) {
-    const wishlist = getWishlist().filter(id => id !== productId);
+  function removeFromWishlist(productId) {
+    const wishlist = getWishlist().filter(id => id != productId);
     saveWishlist(wishlist);
     renderWishlist();
   }
 
   function renderWishlist() {
     const wishlist = getWishlist();
-    const container = document.getElementById('wishlist-container');
+    const allProducts = document.querySelectorAll('.wishlist-product');
     const emptyMessage = document.getElementById('wishlist-empty-message');
     const returnBtn = document.getElementById('return-to-shopping');
-    
-    container.innerHTML = '';
 
     if (wishlist.length === 0) {
       emptyMessage.classList.remove('d-none');
       returnBtn.classList.remove('d-none');
-      return;
     } else {
       emptyMessage.classList.add('d-none');
       returnBtn.classList.add('d-none');
     }
 
-    // Shopify Liquid generates the product_data map
-    const productData = {
-      {% for p in collections.all.products %}
-        "{{ p.id }}": {
-          id: {{ p.id }},
-          url: "{{ p.url }}",
-          title: "{{ p.title | escape }}",
-          img: "{{ p.featured_image | img_url: '400x' }}",
-          price: "{{ p.price | money }}"
-        }{% unless forloop.last %},{% endunless %}
-      {% endfor %}
-    };
-
-    wishlist.forEach(id => {
-      const prod = productData[id];
-      if (prod) {
-        const productCard = `
-          {% render 'product-card', product: '__PRODUCT__' %}
-        `.replace(/__PRODUCT__/g, JSON.stringify({ id: prod.id, url: prod.url, title: prod.title, featured_image: prod.img, price: prod.price }));
-
-        container.insertAdjacentHTML('beforeend', `
-          <div class="col-lg-4 col-md-6 mb-4">
-            ${productCard}
-            <button class="main_btn" onclick="removeFromWishlist(${prod.id})">Remove</button>
-          </div>
-        `);
+    allProducts.forEach(productEl => {
+      const productId = productEl.dataset.productId;
+      if (wishlist.includes(productId)) {
+        productEl.style.display = 'block';
+      } else {
+        productEl.style.display = 'none';
       }
     });
   }
@@ -89,18 +107,18 @@
       "type": "text",
       "id": "main_heading",
       "label": "Main Heading",
-      "default": "Wishlist"
+      "default": "Your Wishlist"
     },
     {
       "type": "text",
       "id": "empty_text",
-      "label": "Empty Wishlist Text",
+      "label": "Empty Wishlist Message",
       "default": "Your wishlist is empty. Add items to see them here!"
     },
     {
       "type": "url",
       "id": "return_url",
-      "label": "Return to Shopping URL",
+      "label": "Return Button Link",
       "default": "/collections/all"
     },
     {
