@@ -55,19 +55,26 @@ ia-modal
 </section>
 
 <script>
-  function addToCart(variantId, quantity) {
-    fetch('/cart/add.js', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id: variantId, quantity: quantity })
-    }).then(response => response.json()).then(data => {
-      alert('Added to cart!');
-    });
-  }
+   function addToCart(variantId, quantity) {
+     fetch('/cart/add.js', {
+       method: 'POST',
+       headers: { 'Content-Type': 'application/json' },
+       body: JSON.stringify({ id: variantId, quantity: quantity })
+     }).then(response => response.json()).then(data => {
+       alert('Added to cart!');
+     });
+   }
 
   function addToWishlist(productId) {
-    alert('Added to wishlist!');
-  }
+     const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+     if (!wishlist.includes(productId)) {
+       wishlist.push(productId);
+       localStorage.setItem('wishlist', JSON.stringify(wishlist));
+       alert('Added to wishlist!');
+     } else {
+       alert('Already in wishlist!');
+     }
+   }
 </script>
 
 {% schema %}
