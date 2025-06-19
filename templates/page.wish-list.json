@@ -16,9 +16,20 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "wishlist_prtjpx": {
+      "type": "Wishlist",
+      "name": "Wishlist Section",
+      "settings": {
+        "main_heading": "Wishlist",
+        "empty_text": "Add items to your wishlist.",
+        "return_url": "shopify://collections/all",
+        "return_button_text": "Return to Shopping"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "wishlist_prtjpx"
   ]
 }
