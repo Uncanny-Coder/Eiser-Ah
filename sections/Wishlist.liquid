@@ -13,36 +13,28 @@
     <div class="row" id="wishlist-container">
       {% for product in collections.all.products %}
         <div class="col-lg-4 col-md-6 mb-4 wishlist-product" data-product-id="{{ product.id }}" style="display: none;">
-          <div class="single-product">
-            <div class="product-img">
+          <div class="single-product text-center">
+            <div class="product-img mb-3">
               <img
                 class="img-fluid"
                 src="{{ product.featured_image | img_url: '500x' }}"
                 alt="{{ product.title }}"
                 style="width: 90%;"
               >
-              <div class="p_icon">
-                <a href="{{ product.url }}">
-                  <i class="fa-solid fa-eye"></i>
-                </a>
-                <a href="#" class="remove-wishlist" data-id="{{ product.id }}">
-                  <i class="fa-solid fa-trash"></i>
-                </a>
-                <a href="#" onclick="addToCart('{{ product.variants.first.id }}', 1); return false;">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                </a>
-              </div>
             </div>
             <div class="product-btn">
-              <a href="{{ product.url }}" class="d-block">
+              <a href="{{ product.url }}" class="d-block mb-2">
                 <h4>{{ product.title }}</h4>
               </a>
-              <div class="mt-3">
+              <div class="mb-2">
                 <span class="mr-4">{{ product.price | money }}</span>
                 {% if product.compare_at_price > product.price %}
                   <del>{{ product.compare_at_price | money }}</del>
                 {% endif %}
               </div>
+              <button class="btn btn-danger btn-sm remove-wishlist-btn" data-id="{{ product.id }}">
+                <i class="fa-solid fa-trash mr-1"></i> Remove from Wishlist
+              </button>
             </div>
           </div>
         </div>
@@ -50,6 +42,19 @@
     </div>
   </div>
 </section>
+
+<style>
+  .remove-wishlist-btn {
+    font-size: 16px;
+    padding: 10px 16px;
+    margin-top: 10px;
+    width: 80%;
+  }
+
+  .single-product .p_icon {
+    display: none !important;
+  }
+</style>
 
 <script>
   function getWishlist() {
@@ -93,8 +98,7 @@
       returnBtn.classList.add('d-none');
     }
 
-    // Bind remove buttons
-    const removeButtons = document.querySelectorAll('.remove-wishlist');
+    const removeButtons = document.querySelectorAll('.remove-wishlist-btn');
     removeButtons.forEach(button => {
       button.addEventListener('click', function(e) {
         e.preventDefault();
