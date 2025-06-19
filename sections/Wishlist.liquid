@@ -1,6 +1,124 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<section class="section_gap">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-12 text-center">
+        <h2 class="contact-title">{{ section.settings.main_heading }}</h2>
+        <p id="wishlist-empty-message" class="text-muted d-none">{{ section.settings.empty_text }}</p>
+        <a href="{{ section.settings.return_url }}" class="main_btn d-none" id="return-to-shopping">
+          {{- section.settings.return_button_text -}}
+        </a>
+      </div>
+    </div>
+
+    <div class="row" id="wishlist-container">
+      <!-- JS will populate wishlist items here -->
+    </div>
+  </div>
+</section>
+
+<script>
+  // Wishlist logic using localStorage
+  function getWishlist() {
+    return JSON.parse(localStorage.getItem('wishlist') || '[]');
   }
+
+  function saveWishlist(wishlist) {
+    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+  }
+
+  function removeFromWishlist(productId) {
+    const wishlist = getWishlist().filter(id => id !== productId);
+    saveWishlist(wishlist);
+    renderWishlist();
+  }
+
+  function renderWishlist() {
+    const wishlist = getWishlist();
+    const container = document.getElementById('wishlist-container');
+    const emptyMessage = document.getElementById('wishlist-empty-message');
+    const returnBtn = document.getElementById('return-to-shopping');
+    
+    container.innerHTML = '';
+
+    if (wishlist.length === 0) {
+      emptyMessage.classList.remove('d-none');
+      returnBtn.classList.remove('d-none');
+      return;
+    } else {
+      emptyMessage.classList.add('d-none');
+      returnBtn.classList.add('d-none');
+    }
+
+    {% paginate collections.all.products by 1000 %}
+      const allProducts = [
+        {% for product in collections.all.products %}
+          {
+            id: {{ product.id }},
+            title: "{{ product.title | escape }}",
+            url: "{{ product.url }}",
+            image: "{{ product.featured_image | image_url: width: 400 }}",
+            price: "{{ product.price | money }}"
+          },
+        {% endfor %}
+      ];
+    {% endpaginate %}
+
+    wishlist.forEach(id => {
+      const product = allProducts.find(p => p.id === id);
+      if (product) {
+        container.innerHTML += `
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card h-100 text-center p-3">
+              <a href="${product.url}">
+                <img src="${product.image}" class="img-fluid mb-3" alt="${product.title}">
+              </a>
+              <h5><a href="${product.url}">${product.title}</a></h5>
+              <p>${product.price}</p>
+              <button class="main_btn" onclick="removeFromWishlist(${product.id})">Remove</button>
+            </div>
+          </div>
+        `;
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', renderWishlist);
+</script>
+
+{% schema %}
+{
+  "name": "Wishlist",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Wishlist"
+    },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Empty Wishlist Text",
+      "default": "Add items to your wishlist."
+    },
+    {
+      "type": "url",
+      "id": "return_url",
+      "label": "Return to Shopping URL",
+      "default": "/collections/all"
+    },
+    {
+      "type": "text",
+      "id": "return_button_text",
+      "label": "Return Button Text",
+      "default": "Return to Shopping"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wishlist Section",
+      "category": "Custom"
+    }
+  ]
+}
 {% endschema %}
