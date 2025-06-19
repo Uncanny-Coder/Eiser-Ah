@@ -52,13 +52,7 @@
     {% paginate collections.all.products by 1000 %}
       const allProducts = [
         {% for product in collections.all.products %}
-          {
-            id: {{ product.id }},
-            title: "{{ product.title | escape }}",
-            url: "{{ product.url }}",
-            image: "{{ product.featured_image | image_url: width: 400 }}",
-            price: "{{ product.price | money }}"
-          },
+         {% render 'product-card' %}
         {% endfor %}
       ];
     {% endpaginate %}
