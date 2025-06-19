@@ -22,7 +22,7 @@
       "name": "Contact Section",
       "settings": {
         "contact_title": "Tracking",
-        "contact_subtitle": "Track your Products here",
+        "contact_subtitle": "Track your Order here",
         "button_text": "Track Order",
         "show_map": false,
         "map_api_key": "",
