@@ -23,7 +23,7 @@
       "settings": {
         "contact_title": "Tracking",
         "contact_subtitle": "Track your Products here",
-        "button_text": "Send Message",
+        "button_text": "Track Order",
         "show_map": false,
         "map_api_key": "",
         "map_latitude": "31.197",
